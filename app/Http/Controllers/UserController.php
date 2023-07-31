@@ -15,7 +15,10 @@ class UserController extends Controller
         $data = $request->input();
 
         if (count($data) != 2) {
-            return response()->json(["errors" => ["Expected: 5. Given: " . count($data)]])->setStatusCode(400);
+            return response()->json([
+                "message" => "The number of parameters for this request are incorrect.",
+                "errors" => ["Expected: 2 - Given: " . count($data)]
+            ])->setStatusCode(400);
         }
 
         $validator = Validator::make(
@@ -33,41 +36,81 @@ class UserController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json(["errors" => $validator->errors()])->setStatusCode(400);
+            return response()->json([
+                "message" => "Parameters validation error.",
+                "errors" => $validator->errors()
+            ])->setStatusCode(400);
         }
 
         if (User::where('email', $data["email"])->exists()) {
-            return response()->json(["errors" => ["There is already a registered user with the given e-mail address."]])->setStatusCode(409);
+            return response()->json([
+                "message" => "A user with this email already exists.",
+                "errors" => ["There is already a registered user with the given e-mail address."]
+            ])->setStatusCode(409);
         }
 
         $newUser = new User;
         $newUser->fill($request->input());
 
         if ($newUser->save()) {
-            return response()->json(["message" => "Register success!"])->setStatusCode(201);
-        } else {
-            return response()->json(["erros" => "An error has occurred at the time of your request. Please contact technical support"])->setStatusCode(500);
+            return response()->json([
+                "message" => "Register success!"
+            ])->setStatusCode(201);
         }
+
+        return response()->json([
+            "errors" => "An error has occurred at the time of your request. Please contact technical support"
+        ])->setStatusCode(500);
     }
 
     public function login(Request $request)
     {
-        $user = User::where('email', $request->input("email"))->first();
-        if ($user) {
 
-            if (Hash::check($request->input("password"), $user->password)) {
+        $data = $request->input();
 
-                $token = $user->createToken("example");
-
-                $response["status"] = 1;
-                $response["msg"] = $token->plainTextToken;
-            } else {
-                $response["msg"] = "Credenciales incorrectas.";
-            }
-        } else {
-            $response["msg"] = "Usuario no encontrado.";
+        if (count($data) != 2) {
+            return response()->json([
+                "message" => "The number of parameters for this request are incorrect.",
+                "errors" => ["Expected: 2. Given: " . count($data)]
+            ])->setStatusCode(400);
         }
 
-        return response()->json($response);
+        $validator = Validator::make(
+            $data,
+            [
+                'email' => 'required|email',
+                'password' => 'required'
+            ],
+            [
+                "email.required" => "No email has been provided.",
+                "email.email" => "The email format is invalid.",
+                "password.email" => "No email has been provided."
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "Parameters validation error.",
+                "errors" => $validator->errors()
+            ])->setStatusCode(400);
+        }
+
+
+        $user = User::where('email', $data["email"])->first();
+
+        if ($user && Hash::check($data["password"], $user->password)) {
+
+            $token = $user->createToken("Access Token");
+
+            return response()->json([
+                "message" => "Successful Authentication.",
+                "token" => $token->plainTextToken,
+            ])->setStatusCode(200);
+        }
+
+        return response()->json([
+            "message" => "Authentication could not be completed.",
+            "errors" => ["Email or password do not match."]
+        ])->setStatusCode(404);
     }
 }

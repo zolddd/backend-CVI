@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             // TODO: Add FK for GeneralData
-            $table->rememberToken();
             $table->timestamps();
         });
     }
