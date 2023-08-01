@@ -3,21 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+use App\Http\Controllers\InformacionGeneralController;
+
+class UsuarioController extends Controller
 {
     public function register(Request $request)
     {
 
         $data = $request->input();
 
-        if (count($data) != 2) {
+        if (count($data) != 3) {
             return response()->json([
                 "message" => "The number of parameters for this request are incorrect.",
-                "errors" => ["Expected: 2 - Given: " . count($data)]
+                "errors" => ["The required parameter number with matches the given ones. Expected: 3 - Given: " . count($data)]
             ])->setStatusCode(400);
         }
 
@@ -25,13 +27,8 @@ class UserController extends Controller
             $data,
             [
                 'email' => 'required|email',
-                'password' => 'required|min:8'
-            ],
-            [
-                "email.required" => "No email has been provided.",
-                "email.email" => "The email format is invalid.",
-                "password.email" => "No email has been provided.",
-                "password.min" => "The password field must be at least 8 characters long.",
+                'password' => 'required|min:8',
+                'informacion_general' => 'required'
             ]
         );
 
@@ -42,15 +39,28 @@ class UserController extends Controller
             ])->setStatusCode(400);
         }
 
-        if (User::where('email', $data["email"])->exists()) {
+        $generalDataValidate = app()->call([InformacionGeneralController::class, 'validateInformation'], ["data" => $data["informacion_general"]]);
+
+        if (!$generalDataValidate[0]) {
+            return response()->json($generalDataValidate[1])->setStatusCode(400);
+        }
+
+        $userIdorError = app()->call([InformacionGeneralController::class,'saveInformation'],["data" => $data["informacion_general"]]);
+
+        if (Usuario::where('email', $data["email"])->exists()) {
             return response()->json([
                 "message" => "A user with this email already exists.",
                 "errors" => ["There is already a registered user with the given e-mail address."]
             ])->setStatusCode(409);
         }
 
-        $newUser = new User;
+        if (!$userIdorError[0]) {
+            return response()->json($userIdorError[1])->setStatusCode($userIdorError[2]);
+        }
+
+        $newUser = new Usuario;
         $newUser->fill($request->input());
+        $newUser->informacion_general_id = $userIdorError[1];
 
         if ($newUser->save()) {
             return response()->json([
@@ -59,7 +69,8 @@ class UserController extends Controller
         }
 
         return response()->json([
-            "errors" => "An error has occurred at the time of your request. Please contact technical support"
+            "message" => "An error has occurred at the time of your request. Please contact technical support",
+            "errors" =>["Error trying to register new user."]
         ])->setStatusCode(500);
     }
 
@@ -96,7 +107,7 @@ class UserController extends Controller
         }
 
 
-        $user = User::where('email', $data["email"])->first();
+        $user = Usuario::where('email', $data["email"])->first();
 
         if ($user && Hash::check($data["password"], $user->password)) {
 

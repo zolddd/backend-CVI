@@ -4,19 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-class GeneralData extends Model
+class InformacionGeneral extends Model
 {
     use HasFactory;
-
+    protected $table = 'informacion_general';
     /**
      * Campos que se pueden llenar de forma masiva
      * 
      * @var array<int,string> 
-     * */ 
+     * */
     protected $fillable = [
-        "CURP",
-        "RFC",
+        "curp",
+        "rfc",
         "nombre",
         "primer_apellido",
         "segundo_apellido",
@@ -33,4 +34,9 @@ class GeneralData extends Model
         "principal"
     ];
 
+    protected $casts = [
+        "fecha_de_nacimiento" => "date",
+        "sexo" => "string",
+        "estado_conyugal" => "string"
+    ];
 }
