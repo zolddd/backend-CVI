@@ -1,6 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
+<a align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
@@ -64,3 +64,41 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+# API CVI UNACH
+API CVI UNACH is the web service that manages the REST API of the UNACH Unique Curriculum Vitae system.
+
+## Installation
+
+1. Clone this repository
+   * In case you don't have the PHP package manager, composer, installed, install it via terminal with: 
+   ```
+   php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    php -r "if (hash_file('sha384', 'composer-setup.php') === 'e21205b207c3ff031906575712edab6f13eb0b361f2085f1f1237b7126d785e826a450292b6cfd1d64d92e6563bbde02') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    php composer-setup.php
+    php -r "unlink('composer-setup.php');"
+    ```
+2. Install all necessary dependencies with: 
+    ```
+    php composer.phar install
+    ```
+3. Copy the `.env.example`
+ file from the root directory of the project, remove the `.example`
+ extension, leaving the file only as `.env`, and fill in the requested data.
+4. Execute the migration of the databases with: 
+    ```
+    php artisan migrate
+    ```
+5. Generate the application encryption key with: 
+    ```
+    php artisan key:generate
+    ```
+6. Launch the project with the following command: 
+    ```
+    php artisan serve --port 8080
+    ```
+
+
+
