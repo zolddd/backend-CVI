@@ -62,27 +62,38 @@ class InformacionGeneralController extends Controller
 
     static public function saveInformation(array $data)
     {
+
+        if (InformacionGeneral::where('curp', $data["curp"])
+            ->orWhere('rfc', $data["rfc"])
+            ->exists()
+        ) {
+            return [false, [
+                "message" => "An error has occurred at the time of your request.",
+                "errors" => ["Some of the unique data is already being used by another user."]
+            ], 409];
+        }
+
         $dataUpper = array_map('strtoupper', $data);
         $generalData = new InformacionGeneral;
         $generalData->fill($dataUpper);
-        
+
         try {
             $generalData->save();
-            $generalData->cvi = "CVI-".$generalData->id;
+            $generalData->cvi = "CVI-" . $generalData->id;
             $generalData->save();
             return [true, $generalData->id];
         } catch (QueryException $error) {
             if ($error->getCode() === '23000') {
                 return [false, [
-                    "message" => "An error has occurred at the time of your request.",
+                    "message" => "An error has occurred at the time of your request. Please contact technical support",
                     "errors" => ["Some of the unique data is already being used by another user."]
-                ],409];
+                ], 409];
             }
 
             return [false, [
                 "message" => "An error has occurred at the time of your request. Please contact technical support",
                 "errors" => ["Error trying to save the user's general data."]
-            ],500];
+            ], 500];
         }
     }
 }
