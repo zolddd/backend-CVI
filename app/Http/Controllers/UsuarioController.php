@@ -64,7 +64,8 @@ class UsuarioController extends Controller
 
         if ($newUser->save()) {
             return response()->json([
-                "message" => "Register success!"
+                "message" => "Register success!",
+                "token"=>$newUser->createToken("Access Token")->plainTextToken
             ])->setStatusCode(201);
         }
 
@@ -90,7 +91,7 @@ class UsuarioController extends Controller
             $data,
             [
                 'email' => 'required|email',
-                'password' => 'required'
+                'password' => 'required|min:8'
             ],
             [
                 "email.required" => "No email has been provided.",
