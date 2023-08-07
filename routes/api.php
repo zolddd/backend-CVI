@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MedioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('domicilioResidencias',DomicilioResidenciaController::class);
 Route::post("/login",[UsuarioController::class, 'login']);
 Route::post("/register",[UsuarioController::class, 'register']);
+
+Route::middleware('auth:sanctum')->post("/medio",[MedioController::class, 'record']);
 
 Route::any("{any}",function(){return response()->json(["message"=>"Route not found"])->setStatusCode(404);});
