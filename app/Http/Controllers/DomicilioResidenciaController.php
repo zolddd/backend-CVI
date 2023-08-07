@@ -42,8 +42,14 @@ class DomicilioResidenciaController extends Controller
         return $domicilioResidencia;
     }
 
-    public function update(Request $request, domicilioResidencia $domicilioResidencia)
+    public function update(Request $request, $id)
     {
+        $domicilioResidencia = domicilioResidencia::find($id);
+
+        if (!$domicilioResidencia) {
+            return response()->json('No se encontró ', 404);
+        }
+    
         $domicilioResidencia-> Pais  = $request -> Pais ;
         $domicilioResidencia-> Codigo_postal  = $request -> Codigo_postal ;
         $domicilioResidencia-> Estado = $request -> Estado ;
@@ -66,9 +72,16 @@ class DomicilioResidenciaController extends Controller
         return $domicilioResidencia;
     }
 
-    public function destroy(domicilioResidencia $domicilioResidencia)
+    public function destroy($id)
     {
+        $domicilioResidencia = domicilioResidencia::find($id);
+
+        if (!$domicilioResidencia) {
+            return response()->json('No se encontró ', 404);
+        }
+    
         $domicilioResidencia->delete();
-        return "Eliminado";
+        return response()->json('Eliminado correctamente', 200);
     }
+    
 }

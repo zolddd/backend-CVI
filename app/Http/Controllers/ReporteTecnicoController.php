@@ -12,7 +12,7 @@ class ReporteTecnicoController extends Controller
      */
     public function index()
     {
-        //
+        return reporteTecnico::all();
     }
 
     /**
@@ -20,7 +20,32 @@ class ReporteTecnicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request ->validate([
+            'titulo' => 'required|string|max:25',
+            'institucion' => 'required|string',
+            'fecha_entrega' => 'required|date',
+            'fecha_publicacion' => 'required|date',
+            'nombramiento' => 'required|string|max:25',
+            'numero_paginas' => 'nullable|string', 
+            'origen' => 'nullable|string|max:15', 
+            'descripcion' => 'nullable|string', 
+            'objetivos' => 'nullable|string', 
+            'palabras_claves' => 'nullable|string',
+        ]);
+        $reporteTecnico = new reporteTecnico;
+        $reporteTecnico -> titulo = $request->input('titulo');
+        $reporteTecnico -> institucion = $request->input('institucion');
+        $reporteTecnico -> fecha_entrega = $request->input('fecha_entrega');
+        $reporteTecnico -> fecha_publicacion = $request->input('fecha_publicacion');
+        $reporteTecnico -> nombramiento = $request->input('nombramiento');
+        $reporteTecnico -> numero_paginas = $request->input('numero_paginas');
+        $reporteTecnico -> origen = $request->input('origen');
+        $reporteTecnico -> descripcion = $request->input('descripcion');
+        $reporteTecnico -> objetivos = $request->input('objetivos');
+        $reporteTecnico -> palabras_claves = $request->input('palabras_claves');
+        
+        $reporteTecnico-> save();
+        return response()->json($reporteTecnico);
     }
 
     /**
@@ -28,22 +53,59 @@ class ReporteTecnicoController extends Controller
      */
     public function show(reporteTecnico $reporteTecnico)
     {
-        //
+        return $reporteTecnico;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, reporteTecnico $reporteTecnico)
+    public function update(Request $request, $id)
     {
-        //
+        $reporteTecnico =  reporteTecnico::find($id);
+
+        if (! $reporteTecnico) {
+            return response()->json('No se encontró', 404);
+        }
+        $request ->validate([
+            'titulo' => 'required|string|max:25',
+            'institucion' => 'required|string',
+            'fecha_entrega' => 'required|date',
+            'fecha_publicacion' => 'required|date',
+            'nombramiento' => 'required|string|max:25',
+            'numero_paginas' => 'nullable|integer', 
+            'origen' => 'nullable|string|max:15', 
+            'descripcion' => 'nullable|string', 
+            'objetivos' => 'nullable|string', 
+            'palabras_claves' => 'nullable|string',
+        ]);
+        
+        $reporteTecnico -> titulo = $request->input('titulo');
+        $reporteTecnico -> institucion = $request->input('institucion');
+        $reporteTecnico -> fecha_entrega = $request->input('fecha_entrega');
+        $reporteTecnico -> fecha_publicacion = $request->input('fecha_publicacion');
+        $reporteTecnico -> nombramiento = $request->input('nombramiento');
+        $reporteTecnico -> numero_paginas = $request->input('numero_paginas');
+        $reporteTecnico -> origen = $request->input('origen');
+        $reporteTecnico -> descripcion = $request->input('descripcion');
+        $reporteTecnico -> objetivos = $request->input('objetivos');
+        $reporteTecnico -> palabras_claves = $request->input('palabras_claves');
+        
+        $reporteTecnico-> update();
+        return response()->json($reporteTecnico);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(reporteTecnico $reporteTecnico)
+    public function destroy($id)
     {
-        //
+        $reporteTecnico = reporteTecnico::find($id);
+
+        if (!$reporteTecnico) {
+            return response()->json('No se encontró ', 404);
+        }
+    
+        $reporteTecnico->delete();
+        return response()->json('Eliminado correctamente', 200);
     }
 }
