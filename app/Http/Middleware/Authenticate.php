@@ -12,6 +12,7 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        return $request->expectsJson() ? null : route('login');
+        abort(response()->json(["message"=>"Your token has expired or has not been provided, please generate a new one."],401));
     }
+    
 }
