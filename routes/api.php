@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('domicilioResidencia',DomicilioResidenciaController::class);//ya
 Route::apiResource('gradoAcademico',GradoAcademicoController::class);//ya
 Route::apiResource('documentoTrabajo',DocumentoTrabajoController::class);//ya
-Route::apiResource('experienciaLaboral',ExperienciaLaboralController::class);
+Route::apiResource('experienciaLaboral',ExperienciaLaboralController::class);//ya
 Route::apiResource('reporteTecnico',ReporteTecnicoController::class);
 
 
