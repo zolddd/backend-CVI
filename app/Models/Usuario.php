@@ -41,4 +41,9 @@ class Usuario extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function medio()
+    {
+        return $this->belongsToMany(Medio::class, 'medio_pivots', 'user_id', 'medio_id');
+    }
 }
