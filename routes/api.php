@@ -25,6 +25,7 @@ Route::apiResource('domicilioResidencias',DomicilioResidenciaController::class);
 Route::post("/login",[UsuarioController::class, 'login']);
 Route::post("/register",[UsuarioController::class, 'register']);
 
-Route::middleware('auth:sanctum')->post("/medio",[MedioController::class, 'record']);
+Route::middleware('auth:sanctum')->post("/medios",[MedioController::class, 'record']);
+Route::middleware('auth:sanctum')->get("/medios",[MedioController::class, 'list']);
 
 Route::any("{any}",function(){return response()->json(["message"=>"Route not found"])->setStatusCode(404);});

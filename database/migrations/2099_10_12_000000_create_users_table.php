@@ -16,9 +16,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
-
+            
             $table->unsignedBigInteger('informacion_general_id')->nullable();
-
             $table->foreign('informacion_general_id')->references('id')->on('informacion_general')->onDelete('cascade')->onDelete('cascade');
         });
     }

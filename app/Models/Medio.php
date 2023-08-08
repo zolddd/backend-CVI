@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Usuario;
 
 class Medio extends Model
 {
@@ -22,6 +23,12 @@ class Medio extends Model
     ];
 
     protected $casts = [
-        "categoria" => "string"
+        "categoria" => "string",
+        "principal" => "boolean"
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(Usuario::class, 'medio_pivots', 'medio_id', 'user_id');
+    }
 }

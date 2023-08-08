@@ -58,4 +58,8 @@ class MedioController extends Controller
         // echo gettype($request->user()->id);
         return response()->json(["message" => "Medio successfully saved"])->setStatusCode(200);
     }
+
+    public function list(Request $request){
+        return response()->json($request->user()->medio()->select([])->get())->setStatusCode(200);
+    }
 }

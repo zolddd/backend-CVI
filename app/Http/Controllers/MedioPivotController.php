@@ -20,4 +20,8 @@ class MedioPivotController extends Controller
 
         $medio->save();
     }
+
+    static public function getByUserID(Usuario $user){
+        $response = MedioPivot::where('user_id',$user->id);
+    }
 }
