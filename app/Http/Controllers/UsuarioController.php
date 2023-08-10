@@ -45,7 +45,7 @@ class UsuarioController extends Controller
             return response()->json($generalDataValidate[1])->setStatusCode(400);
         }
 
-        $userIdorError = app()->call([InformacionGeneralController::class,'saveInformation'],["data" => $data["informacion_general"]]);
+        $userIdorError = app()->call([InformacionGeneralController::class, 'saveInformation'], ["data" => $data["informacion_general"]]);
 
         if (Usuario::where('email', $data["email"])->exists()) {
             return response()->json([
@@ -65,13 +65,13 @@ class UsuarioController extends Controller
         if ($newUser->save()) {
             return response()->json([
                 "message" => "Register success!",
-                "token"=>$newUser->createToken("Access Token")->plainTextToken
+                "token" => $newUser->createToken("Access Token")->plainTextToken
             ])->setStatusCode(201);
         }
 
         return response()->json([
             "message" => "An error has occurred at the time of your request. Please contact technical support",
-            "errors" =>["Error trying to register new user."]
+            "errors" => ["Error trying to register new user."]
         ])->setStatusCode(500);
     }
 
@@ -124,5 +124,89 @@ class UsuarioController extends Controller
             "message" => "Authentication could not be completed.",
             "errors" => ["Email or password do not match."]
         ])->setStatusCode(404);
+    }
+
+    public function update(Request $request)
+    {
+        $data = $request->input();
+        $validKeys = ["email", "new_password", "old_password"];
+
+        $data = array_filter($data, function ($key) use ($validKeys) {
+            return in_array($key, $validKeys);
+        }, ARRAY_FILTER_USE_KEY);
+
+        $validator = Validator::make(
+            $data,
+            [
+                'email' => 'email',
+                'new_password' => 'min:8'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "Parameters validation error.",
+                "errors" => $validator->errors()
+            ])->setStatusCode(400);
+        }
+
+        $keys = array_keys($data);
+
+        if ((in_array("new_password", $keys) && !in_array("old_password", $keys)) ||
+            (!in_array("new_password", $keys) && in_array("old_password", $keys))
+        ) {
+            return response()->json([
+                "message" => "Missing params",
+                "errors" => ["old_password or new_password params not found in yout request"]
+            ])->setStatusCode(400);
+        }
+
+        if(in_array("new_password", $keys) && !Hash::check($data["old_password"],$request->user()->password)){
+            return response()->json([
+                "message" => "Wrong password",
+                "errors" => ["The password entered does not match the current password."]
+            ])->setStatusCode(400);
+        }        
+
+        if(in_array("new_password", $keys)){
+            $request->user()->password = $data["new_password"];
+        }
+
+        if(in_array("email", $keys)){
+            $request->user()->email = $data["email"];
+        }
+
+        $request->user()->save();
+        return response()->json(["message" => "User credentials updated"])->setStatusCode(200);
+    }
+
+    public function remove(Request $request){
+
+        $data = $request->input();
+
+        $validator = Validator::make(
+            $data,
+            [
+                'password' => 'required|min:8'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json([
+                "message" => "Parameters validation error.",
+                "errors" => $validator->errors()
+            ])->setStatusCode(400);
+        }
+
+        if(!Hash::check($data["password"],$request->user()->password)){
+            return response()->json([
+                "message" => "Wrong password",
+                "errors" => ["The password entered does not match the current password."]
+            ])->setStatusCode(400);
+        }
+
+        $request->user()->delete();
+
+        return response()->json(["message"=>"Your account has been successfully deleted"])->setStatusCode(200);
     }
 }

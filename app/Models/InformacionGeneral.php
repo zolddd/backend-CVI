@@ -38,4 +38,8 @@ class InformacionGeneral extends Model
         "sexo" => "string",
         "estado_conyugal" => "string"
     ];
+
+    public function user(){
+        return $this->hasOne(Usuario::class, 'informacion_general_id','id');
+    }
 }

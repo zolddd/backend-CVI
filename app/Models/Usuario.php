@@ -46,4 +46,8 @@ class Usuario extends Authenticatable
     {
         return $this->belongsToMany(Medio::class, 'medio_pivots', 'user_id', 'medio_id');
     }
+
+    public function info(){
+        return $this->belongsTo(InformacionGeneral::class, 'informacion_general_id','id');
+    }
 }
