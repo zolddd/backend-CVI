@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InformacionGeneral;
+use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 
@@ -95,5 +96,33 @@ class InformacionGeneralController extends Controller
                 "errors" => ["Error trying to save the user's general data."]
             ], 500];
         }
+    }
+
+    public function get(Request $request){
+        return response()->json($request->user()->info);
+
+    }
+
+    public function update(Request $request){
+
+        $data = $request->input();
+
+        if (count($data) != 11) {
+            return [false, [
+                "message" => "The expected number of parameters for 'Informacion General' is incorrect.",
+                "errors" => ["The required parameter number with matches the given ones. Expected: 11 - Given: " . count($data)]
+            ]];
+        }
+
+        $isValidateOrInfo = self::validateInformation($data);
+
+        if (!$isValidateOrInfo[0]) {
+            return response()->json($isValidateOrInfo[1])->setStatusCode(400);
+        }
+
+        $request->user()->info->fill($data);
+        $request->user()->info->save();
+
+        return response()->json(["message"=>"Your general information has been successfully updated"])->setStatusCode(200);
     }
 }
