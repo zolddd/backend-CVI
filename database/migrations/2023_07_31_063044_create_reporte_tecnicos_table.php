@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('fecha_entrega');
             $table->date('fecha_publicacion');
             $table->string('nombramiento',25);
-            $table->bigInteger('numero_paginas');
+            $table->string('numero_paginas');
             $table->string('origen',15);
             $table->tinyText('descripcion');
             $table->tinyText('objetivos');

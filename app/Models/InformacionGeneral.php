@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class InformacionGeneral extends Model
 {
@@ -39,4 +38,8 @@ class InformacionGeneral extends Model
         "sexo" => "string",
         "estado_conyugal" => "string"
     ];
+
+    public function user(){
+        return $this->hasOne(Usuario::class, 'informacion_general_id','id');
+    }
 }

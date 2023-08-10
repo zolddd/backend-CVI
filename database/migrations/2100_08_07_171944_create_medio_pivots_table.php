@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuarios', function (Blueprint $table) {
+        Schema::create('medio_pivots', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
-            $table->string('password');
             $table->timestamps();
 
-            $table->unsignedBigInteger('informacion_general_id')->nullable();
-            $table->foreign('informacion_general_id')->references('id')->on('informacion_general')->onDelete('cascade');
+            $table->unsignedBigInteger('medio_id');
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('medio_id')->references('id')->on('medio')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('usuarios')->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('usuarios');
+        Schema::dropIfExists('medio_pivots');
     }
 };
