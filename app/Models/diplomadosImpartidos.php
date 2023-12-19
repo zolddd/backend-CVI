@@ -17,6 +17,13 @@ class diplomadosImpartidos extends Model
         "Area",
         "Campo",
         "Disciplina",
-        "Subdisciplina"
+        "Subdisciplina",
+        "id_investigador"
     ];
+
+    public function usuario()
+    {
+        // efinir la relación muchos a uno (un curso diploamdo pertenece a un usuario)
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
 }

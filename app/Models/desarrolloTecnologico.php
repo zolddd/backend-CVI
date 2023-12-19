@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\innovaion;
 
 class desarrolloTecnologico extends Model
 {
@@ -22,13 +23,29 @@ class desarrolloTecnologico extends Model
             "Subdisciplina",
             "Generacion_valor",
             "Formacion_RRHH",
-            "Id.Usuario_beneficiario",
+            "Id-Usuario_beneficiario",
             "Aplicacion_conocimeinto",
             "Teorico-practico_original",
-            "Id.Innvacion_implementado",
+            "Id-Innvacion_implementado",
             "Problema_resuelve",
             "Analisis_pertenencia",
-            "Linea_investigacion"
+            "Linea_investigacion",
+            "id_investigador",
+            // "id_innovacion",
+
     ];
+
+    public function usuario()
+    {
+        // definir la relación con el usuario
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
+
+    // public function innovacion()
+    // {
+    //     // definir la relación con la iinovacion
+    //     //un desarollo tiene una innovacion, relacion 1 a 1
+    //     return $this->hasOne(innovaion::class);
+    // }
 
 }

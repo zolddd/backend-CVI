@@ -32,7 +32,15 @@ class desarrolloSoftware extends Model
         "Identificacion_innocacion_imple",
         "Problema_resuelve",
         "Analisi_pertinencia",
-        "Linea_investigacion"
+        "Linea_investigacion",
+        "id_investigador"
     ];
+
+    public function usuario()
+    {
+        // definir la relación muchos a uno (un desarollo le pertenece a un usuario)
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
+    
 
 }

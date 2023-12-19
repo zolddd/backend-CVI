@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    
     public function up(): void
     {
         Schema::create('innovaions', function (Blueprint $table) {
@@ -35,13 +33,15 @@ return new class extends Migration
             $table->tinyText('Analisis_pertinencia');
             $table->tinyText('Linea_investigacion');
             $table->tinyText('Generacion_valor');
+
+            // estableciendo relacion de inovacion con el usuario
+            $table->unsignedBigInteger('id_investigador')->nullable();
+            $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('innovaions');

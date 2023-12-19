@@ -19,6 +19,13 @@ class gradoAcademico extends Model
         "Cedula",
         "Opciones_Titulacion",
         "Fecha_Obtencion",
-        "Institucion"
+        "Institucion",
+        "id_investigador"
     ];
+
+    public function usuario()
+    {
+        // efinir la relación muchos a uno (un curso impartido pertenece a un usuario)
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
 }

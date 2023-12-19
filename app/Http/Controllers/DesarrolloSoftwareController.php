@@ -4,46 +4,119 @@ namespace App\Http\Controllers;
 
 use App\Models\desarrolloSoftware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DesarrolloSoftwareController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        try {
+            $data = desarrolloSoftware::get();
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
-        //
+        try {
+            if (Auth::check()) {
+                // Obtén el ID del usuario autenticado
+                $userId = Auth::id();
+                $data["Titulo"] = $request["Titulo"];
+                $data["Tipo_desarrollo"] = $request["Tipo_desarrollo"];
+                $data["Derechos_autor"] = $request["Derechos_autor"];
+                $data["Pais"] = $request["Pais"];
+                $data["Derechos_Autor2"] = $request["Derechos_Autor2"];
+                $data["Pais2"] = $request["Pais2"];
+                $data["Horas_hombre"] = $request["Horas_hombre"];
+                $data["Fecha_Inicio"] = $request["Fecha_Inicio"];
+                $data["Fecha_fin"] = $request["Fecha_fin"];
+                $data["Costo"] = $request["Costo"];
+                $data["Rol_participacion"] = $request["Rol_participacion"];
+                $data["Beneficiario"] = $request["Beneficiario"];
+                $data["Objectivo"] = $request["Objectivo"];
+                $data["Resumen"] = $request["Resumen"];
+                $data["Contribucion"] = $request["Contribucion"];
+                $data["Generacion_valor"] = $request["Generacion_valor"];
+                $data["Formacion_RRRHH"] = $request["Formacion_RRRHH"];
+                $data["Logros"] = $request["Logros"];
+                $data["Generacion_conocimiento_tp"] = $request["Generacion_conocimiento_tp"];
+                $data["Identificacion_innocacion_imple"] = $request["Identificacion_innocacion_imple"];
+                $data["Problema_resuelve"] = $request["Problema_resuelve"];
+                $data["Analisi_pertinencia"] = $request["Analisi_pertinencia"];
+                $data["Linea_investigacion"] = $request["Linea_investigacion"];
+
+                // Asigna el user_id al nuevo desarollo
+                $data["id_investigador"] = $userId;
+                $response = desarrolloSoftware::create($data);
+                return response()->json($response, 200);
+            }
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(desarrolloSoftware $desarrolloSoftware)
+
+
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            //data es un array con los datos del request
+            $data["Titulo"] = $request["Titulo"];
+            $data["Tipo_desarrollo"] = $request["Tipo_desarrollo"];
+            $data["Derechos_autor"] = $request["Derechos_autor"];
+            $data["Pais"] = $request["Pais"];
+            $data["Derechos_Autor2"] = $request["Derechos_Autor2"];
+            $data["Pais2"] = $request["Pais2"];
+            $data["Horas_hombre"] = $request["Horas_hombre"];
+            $data["Fecha_Inicio"] = $request["Fecha_Inicio"];
+            $data["Fecha_fin"] = $request["Fecha_fin"];
+            $data["Costo"] = $request["Costo"];
+            $data["Rol_participacion"] = $request["Rol_participacion"];
+            $data["Beneficiario"] = $request["Beneficiario"];
+            $data["Objectivo"] = $request["Objectivo"];
+            $data["Resumen"] = $request["Resumen"];
+
+            $data["Contribucion"] = $request["Contribucion"];
+
+            $data["Generacion_valor"] = $request["Generacion_valor"];
+            $data["Formacion_RRRHH"] = $request["Formacion_RRRHH"];
+            $data["Logros"] = $request["Logros"];
+            $data["Generacion_conocimiento_tp"] = $request["Generacion_conocimiento_tp"];
+            $data["Identificacion_innocacion_imple"] = $request["Identificacion_innocacion_imple"];
+            $data["Problema_resuelve"] = $request["Problema_resuelve"];
+            $data["Analisi_pertinencia"] = $request["Analisi_pertinencia"];
+            $data["Linea_investigacion"] = $request["Linea_investigacion"];
+
+            //se realiza una busqueda por el id y se actualiza
+            desarrolloSoftware::find($id)->update($data);
+
+            //se retorna el objecto ya actualizado traido de la bd
+            $response = desarrolloSoftware::find($id);
+
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, desarrolloSoftware $desarrolloSoftware)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(desarrolloSoftware $desarrolloSoftware)
+    public function destroy($id)
     {
-        //
+        try {
+
+            desarrolloSoftware::find($id)->delete($id);
+            $res = desarrolloSoftware::find($id);
+            return response()->json("Delete successfully", 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 }

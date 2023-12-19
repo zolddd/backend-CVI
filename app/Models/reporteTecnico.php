@@ -20,5 +20,6 @@ class reporteTecnico extends Model
         "descripcion",
         "objetivos",
         "palabras_claves",
+        "id_investigador"
     ];
 }

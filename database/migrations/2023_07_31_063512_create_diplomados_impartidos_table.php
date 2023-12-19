@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+  
     public function up(): void
     {
         Schema::create('diplomados_impartidos', function (Blueprint $table) {
@@ -21,13 +19,13 @@ return new class extends Migration
             $table->string('Campo');
             $table->string('Disciplina');
             $table->string('Subdisciplina');
+            // estableciendo relacion de los diplomados con el usuario
+            $table->unsignedBigInteger('id_investigador')->nullable();
+            $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('diplomados_impartidos');

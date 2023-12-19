@@ -30,6 +30,14 @@ class innovaion extends Model
         "Problema_resuelve",
         "Analisis_pertinencia",
         "Linea_investigacion",
-        "Generacion_valor"
+        "Generacion_valor",
+        "id_investigador"
     ];
+
+
+    public function usuario()
+    {
+        // efinir la relación muchos a uno (una inovacion le pertenece a un usuario)
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
 }

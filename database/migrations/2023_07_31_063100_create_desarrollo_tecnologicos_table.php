@@ -32,13 +32,21 @@ return new class extends Migration
             $table->tinyText('Problema_resuelve');
             $table->tinyText('Analisis_pertenencia');
             $table->tinyText('Linea_investigacion');
+
+            // estableciendo relacion del desarollo tecnologico con el usuario
+            $table->unsignedBigInteger('id_investigador')->nullable();
+            $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
+
+            //    // estableciendo relacion de la innovacion con el desarollo tecnologico 
+            //    $table->unsignedBigInteger('id_innovacion')->nullable();
+            //    $table->foreign('id_innovacion')->references('id')->on('innovaions')->onDelete('cascade');
+
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
         Schema::dropIfExists('desarrollo_tecnologicos');

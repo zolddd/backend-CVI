@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('usuarios', function (Blueprint $table) {
+            // En la migración de 'usuarios'
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
@@ -22,11 +23,12 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+    
     public function down(): void
     {
+        Schema::disableForeignKeyConstraints(); // Deshabilita las restricciones de clave externa primero
         Schema::dropIfExists('usuarios');
+        
+        
     }
 };

@@ -19,6 +19,7 @@ class experienciaLaboral extends Model
         "Areas",
         "Campo",
         "Disciplina",
-        "Subdisciplina"
+        "Subdisciplina",
+        "id_investigador"
     ];
 }

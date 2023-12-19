@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,16 +13,19 @@ return new class extends Migration
         Schema::create('grado_academicos', function (Blueprint $table) {
             $table->id();
             $table->string('Titulo', 25);
-            $table->enum('Nivel_escolaridad',['preparatoria','licenciatura','ingeniería','maestría','doctorado'])->default('licenciatura');
+            $table->enum('Nivel_escolaridad', ['preparatoria', 'licenciatura', 'ingeniería', 'maestría', 'doctorado'])->default('licenciatura');
             $table->enum('Estatus', ['Activo', 'Inactivo', 'En proceso'])->default('Inactivo');
-            $table->string('Area',25);
-            $table->string('Campo',25);
-            $table->string('Disciplina',25);
-            $table->string('Subdisciplina',25);
-            $table->string('Cedula',25);
-            $table->string('Opciones_Titulacion',25);
+            $table->string('Area', 25);
+            $table->string('Campo', 25);
+            $table->string('Disciplina', 25);
+            $table->string('Subdisciplina', 25);
+            $table->string('Cedula', 25);
+            $table->string('Opciones_Titulacion', 25);
             $table->date('Fecha_Obtencion');
             $table->tinyText('Institucion');
+            // estableciendo relacion con el usuario
+            $table->unsignedBigInteger('id_investigador')->nullable();
+            $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

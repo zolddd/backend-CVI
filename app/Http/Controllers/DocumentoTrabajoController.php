@@ -5,21 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\documentoTrabajo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 
 class DocumentoTrabajoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         return documentoTrabajo::all();
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */   
 
     public function store(Request $request)
     {
@@ -43,45 +38,43 @@ class DocumentoTrabajoController extends Controller
             return response()->json(['errors' => $validator->errors()], 400);
         }
 
-        // Crear una nueva instancia del modelo y asignar los valores de los campos.
-        $documentoTrabajo = new documentoTrabajo;
-        $documentoTrabajo->Titulo_documento = $request->input('Titulo_documento');
-        $documentoTrabajo->Nombre_autor = $request->input('Nombre_autor');
-        $documentoTrabajo->Primer_Apellido_Autor = $request->input('Primer_Apellido_Autor');
-        $documentoTrabajo->Segundo_Apellido_Autor = $request->input('Segundo_Apellido_Autor');
-        $documentoTrabajo->Paginas = $request->input('Paginas');
-        $documentoTrabajo->Palabras_claves = $request->input('Palabras_claves');
-        $documentoTrabajo->Titulo_publicacion = $request->input('Titulo_publicacion');
-        $documentoTrabajo->Año_Publicacion = $request->input('Año_Publicacion');
-        $documentoTrabajo->Area = $request->input('Area');
-        $documentoTrabajo->Campo = $request->input('Campo');
-        $documentoTrabajo->Disciplina = $request->input('Disciplina');
-        $documentoTrabajo->Subdisciplina = $request->input('Subdisciplina');
+        if (Auth::check()) {
+            // Obtén el ID del usuario autenticado
+            $userId = Auth::id();
+            // Crear una nueva instancia del modelo y asignar los valores de los campos.
+            $documentoTrabajo = new documentoTrabajo;
+            $documentoTrabajo->Titulo_documento = $request->input('Titulo_documento');
+            $documentoTrabajo->Nombre_autor = $request->input('Nombre_autor');
+            $documentoTrabajo->Primer_Apellido_Autor = $request->input('Primer_Apellido_Autor');
+            $documentoTrabajo->Segundo_Apellido_Autor = $request->input('Segundo_Apellido_Autor');
+            $documentoTrabajo->Paginas = $request->input('Paginas');
+            $documentoTrabajo->Palabras_claves = $request->input('Palabras_claves');
+            $documentoTrabajo->Titulo_publicacion = $request->input('Titulo_publicacion');
+            $documentoTrabajo->Año_Publicacion = $request->input('Año_Publicacion');
+            $documentoTrabajo->Area = $request->input('Area');
+            $documentoTrabajo->Campo = $request->input('Campo');
+            $documentoTrabajo->Disciplina = $request->input('Disciplina');
+            $documentoTrabajo->Subdisciplina = $request->input('Subdisciplina');
 
-        $documentoTrabajo->save();
-
-        // Devolver el objeto creado en la respuesta.
-        //return response()->json(['data' => $documentoTrabajo], 201);
-        return response()->json($documentoTrabajo);
+            $documentoTrabajo->id_investigador = $userId;
+            $documentoTrabajo->save();
+            return response()->json($documentoTrabajo);
+        }
     }
-    
-    /**
-     * Display the specified resource.
-     */
+
+
     public function show(documentoTrabajo $documentoTrabajo)
     {
         return $documentoTrabajo;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, $id)
     {
         // Verificar si el registro con el ID especificado existe
-        $documentoTrabajo =  documentoTrabajo::find($id);
+        $documentoTrabajo = documentoTrabajo::find($id);
 
-        if (! $documentoTrabajo) {
+        if (!$documentoTrabajo) {
             return response()->json('No se encontró', 404);
         }
         // Validar la solicitud
@@ -119,13 +112,9 @@ class DocumentoTrabajoController extends Controller
 
         $documentoTrabajo->update();
 
-        // Devolver el objeto creado en la respuesta.
-        //return response()->json(['data' => $documentoTrabajo], 201);
         return response()->json($documentoTrabajo);
     }
-        /**
-     * Remove the specified resource from storage.
-     */
+   
     public function destroy($id)
     {
         $documentoTrabajo = documentoTrabajo::find($id);
@@ -133,9 +122,9 @@ class DocumentoTrabajoController extends Controller
         if (!$documentoTrabajo) {
             return response()->json('No se encontró ', 404);
         }
-    
+
         $documentoTrabajo->delete();
         return response()->json('Eliminado correctamente', 200);
     }
-    
+
 }
