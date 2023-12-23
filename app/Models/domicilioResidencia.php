@@ -8,7 +8,6 @@ class domicilioResidencia extends Model
 {
     use HasFactory;
 
-    
     protected $fillable=[
         "Pais",
         "Codigo_postal",

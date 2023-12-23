@@ -14,6 +14,8 @@ use App\Http\Controllers\CursosImpartidosController;
 use App\Http\Controllers\DesarrolloTecnologicoController;
 use App\Http\Controllers\InnovaionController;
 use App\Http\Controllers\DesarrolloSoftwareController;
+use App\Http\Controllers\TesisDirigidaController;
+use App\Http\Controllers\ProyectosInvestigacionController;
 
 use App\Http\Controllers\UsuarioController;
 
@@ -53,6 +55,14 @@ Route::apiResource('innovaion', InnovaionController::class)->middleware('auth:sa
 
 //Desarrollo de software
 Route::apiResource('desarrolloSoftware', DesarrolloSoftwareController::class)->middleware('auth:sanctum');
+
+
+//Tesis Dirigida
+Route::apiResource('tesisDirigida', TesisDirigidaController::class)->middleware('auth:sanctum');
+
+
+//Proyectos Investigacion
+Route::apiResource('proyectosInvestigacion', ProyectosInvestigacionController::class)->middleware('auth:sanctum');
 
 
 
