@@ -16,6 +16,8 @@ use App\Http\Controllers\InnovaionController;
 use App\Http\Controllers\DesarrolloSoftwareController;
 use App\Http\Controllers\TesisDirigidaController;
 use App\Http\Controllers\ProyectosInvestigacionController;
+use App\Http\Controllers\EstanciasInvestigacionController;
+use App\Http\Controllers\PublicacionCientificaArticulosController;
 
 use App\Http\Controllers\UsuarioController;
 
@@ -63,6 +65,19 @@ Route::apiResource('tesisDirigida', TesisDirigidaController::class)->middleware(
 
 //Proyectos Investigacion
 Route::apiResource('proyectosInvestigacion', ProyectosInvestigacionController::class)->middleware('auth:sanctum');
+
+
+//estancias Investigacion
+Route::apiResource('estanciasInvestigacion', EstanciasInvestigacionController::class)->middleware('auth:sanctum');
+
+
+//Publicacion Cientifica de Articulos
+Route::apiResource('publicacionCientificaArticulos', PublicacionCientificaArticulosController::class)->middleware('auth:sanctum');
+
+
+//patente
+
+
 
 
 
