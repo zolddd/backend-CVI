@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estancias_investigacion', function (Blueprint $table) {
+        Schema::create('participacion_congreso', function (Blueprint $table) {
             $table->id();
-            $table->string('institucion', 30);
-            $table->string('nombre_estancia', 30);
-            $table->date('inicio');
-            $table->date('fin');
-            $table->string('tipo_estancia', 30);
-            $table->string('logro_profesional', 30);
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',30);
-            $table->string('subdisciplina',30);
+            $table->string('nombre_congreso', 30);
+            $table->string('titulo_trabajo', 30);
+            $table->string('participacion_congreso', 30);
+            $table->string('pais',25);
+            $table->date('fecha');
+            $table->string('palabra_clave1',30);
+            $table->string('palabra_clave2',30);
+            $table->string('palabra_clave3',30);
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('estancias_investigacion');
+        Schema::dropIfExists('participacion_congreso');
     }
 };

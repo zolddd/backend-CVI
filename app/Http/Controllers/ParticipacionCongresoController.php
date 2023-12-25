@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\cursosImpartidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\participacionCongreso;
 
-class CursosImpartidosController extends Controller
+class ParticipacionCongresoController extends Controller
 {
     public function index()
     {
         try {
-            $data = cursosImpartidos::get();
+            $data = participacionCongreso::get();
             return response()->json($data, 200);
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 500);
@@ -27,19 +27,17 @@ class CursosImpartidosController extends Controller
                 // Obtén el ID del usuario autenticado
                 $userId = Auth::id();
 
-                $data["Nombre_curso"] = $request["Nombre_curso"];
-                $data["Horas_total"] = $request["Horas_total"];
-                $data["Fecha_inicio"] = $request["Fecha_inicio"];
-                $data["Fecha_fin"] = $request["Fecha_fin"];
-                $data["Nivel_escolaridad"] = $request["Nivel_escolaridad"];
-                $data["Area"] = $request["Area"];
-                $data["Campo"] = $request["Campo"];
-                $data["Disciplina"] = $request["Disciplina"];
-                $data["Subdisciplina"] = $request["Subdisciplina"];
-
+                $data["nombre_congreso"] = $request["nombre_congreso"];
+                $data["titulo_trabajo"] = $request["titulo_trabajo"];
+                $data["participacion_congreso"] = $request["participacion_congreso"];
+                $data["pais"] = $request["pais"];
+                $data["fecha"] = $request["fecha"];
+                $data["palabra_clave1"] = $request["palabra_clave1"];
+                $data["palabra_clave2"] = $request["palabra_clave2"];
+                $data["palabra_clave3"] = $request["palabra_clave3"];
                 // Asigna el user_id al nuevo curso impartido
                 $data["id_investigador"] = $userId;
-                $response = cursosImpartidos::create($data);
+                $response = participacionCongreso::create($data);
                 return response()->json($response, 200);
 
             }
@@ -53,20 +51,20 @@ class CursosImpartidosController extends Controller
     {
         try {
             //data es un array con los datos del request
-            $data["Nombre_diplomado"] = $request["Nombre_diplomado"];
-            $data["Nombre_curso"] = $request["Nombre_curso"];
-            $data["AÑO"] = $request["AÑO"];
-            $data["Horas_totales"] = $request["Horas_totales"];
-            $data["Area"] = $request["Area"];
-            $data["Campo"] = $request["Campo"];
-            $data["Disciplina"] = $request["Disciplina"];
-            $data["Subdisciplina"] = $request["Subdisciplina"];
+            $data["nombre_congreso"] = $request["nombre_congreso"];
+            $data["titulo_trabajo"] = $request["titulo_trabajo"];
+            $data["participacion_congreso"] = $request["participacion_congreso"];
+            $data["pais"] = $request["pais"];
+            $data["fecha"] = $request["fecha"];
+            $data["palabra_clave1"] = $request["palabra_clave1"];
+            $data["palabra_clave2"] = $request["palabra_clave2"];
+            $data["palabra_clave3"] = $request["palabra_clave3"];
 
             //se realiza una busqueda por el id y se actualiza
-            cursosImpartidos::find($id)->update($data);
+            participacionCongreso::find($id)->update($data);
 
             //se retorna el objecto ya actualizado traido de la bd
-            $response = cursosImpartidos::find($id);
+            $response = participacionCongreso::find($id);
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
@@ -78,8 +76,8 @@ class CursosImpartidosController extends Controller
     {
         try {
 
-            cursosImpartidos::find($id)->delete($id);
-            $res = cursosImpartidos::find($id);
+            participacionCongreso::find($id)->delete($id);
+            $res = participacionCongreso::find($id);
             return response()->json("Delete successfully", 200);
 
         } catch (\Throwable $th) {

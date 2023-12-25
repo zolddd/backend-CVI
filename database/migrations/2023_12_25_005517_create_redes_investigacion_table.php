@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('estancias_investigacion', function (Blueprint $table) {
+        Schema::create('redes_investigacion', function (Blueprint $table) {
             $table->id();
-            $table->string('institucion', 30);
-            $table->string('nombre_estancia', 30);
-            $table->date('inicio');
-            $table->date('fin');
-            $table->string('tipo_estancia', 30);
-            $table->string('logro_profesional', 30);
+            $table->string('nombre_red', 30);
+            $table->date('fecha_creacion');
+            $table->date('fecha_ingreso');
+            $table->string('nombre_responsable', 30);
+            $table->string('primer_apellido_responsable', 30);
+            $table->string('segundo_apellido_responsable', 30);
+            $table->string('institucion_adscripcion', 30);
+            $table->bigInteger('total_integrantes');            
             $table->string('area', 30);
             $table->string('campo',30);
             $table->string('disciplina',30);
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('estancias_investigacion');
+        Schema::dropIfExists('redes_investigacion');
     }
 };
