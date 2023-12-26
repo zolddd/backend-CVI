@@ -20,6 +20,11 @@ use App\Http\Controllers\EstanciasInvestigacionController;
 use App\Http\Controllers\PublicacionCientificaArticulosController;
 use App\Http\Controllers\ParticipacionCongresoController;
 use App\Http\Controllers\GruposInvestigacionController;
+use App\Http\Controllers\PublicacionCientificaLibrosController;
+use App\Http\Controllers\EvaluacionesConacytController;
+use App\Http\Controllers\EvaluacionesNoConacytController;
+use App\Http\Controllers\DocumentosTrabajoController;
+
 
 
 use App\Http\Controllers\UsuarioController;
@@ -78,16 +83,33 @@ Route::apiResource('estanciasInvestigacion', EstanciasInvestigacionController::c
 Route::apiResource('publicacionCientificaArticulos', PublicacionCientificaArticulosController::class)->middleware('auth:sanctum');
 
 
-//Patente
-
-
-
-
 //participacion congreso
 Route::apiResource('participacionCongreso', ParticipacionCongresoController::class)->middleware('auth:sanctum');
 
 //grupos Investigacion
 Route::apiResource('gruposInvestigacion', GruposInvestigacionController::class)->middleware('auth:sanctum');
+
+
+//Publicacion Cientifica de libros
+Route::apiResource('publicacionCientificaLibros', PublicacionCientificaLibrosController::class)->middleware('auth:sanctum');
+
+
+//Evaluaciones Conacyt
+Route::apiResource('evaluacionesConacyt', EvaluacionesConacytController::class)->middleware('auth:sanctum');
+
+
+//Evaluaciones NO Conacyt
+Route::apiResource('evaluacionesNoConacyt', EvaluacionesNoConacytController::class)->middleware('auth:sanctum');
+
+
+//Documentos de trabajo
+Route::apiResource('documentosTrabajo', DocumentosTrabajoController::class)->middleware('auth:sanctum');
+
+
+
+
+
+
 
 
 

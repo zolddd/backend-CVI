@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('titulo_articulo', 30);
             $table->bigInteger('num_revista');
             $table->bigInteger('vol_revista');
-            $table->string('year_publicacion', 30);
+            $table->bigInteger('year_publicacion', 30);
             $table->bigInteger('de_pagina');
             $table->bigInteger('a_pagina');
             $table->string('palabra_clave1', 30);
