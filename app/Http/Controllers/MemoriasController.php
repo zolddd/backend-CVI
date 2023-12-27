@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\memorias;
+use Illuminate\Support\Facades\Auth;
+
+class MemoriasController extends Controller
+{
+    public function index()
+    {
+        try {
+            $data = memorias::get();
+            return response()->json($data, 200);
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
+    }
+
+
+    public function store(Request $request)
+    {
+        try {
+
+            if (Auth::check()) {
+                // Obtén el ID del usuario autenticado
+                $userId = Auth::id();
+                $data["titulo_memorias"] = $request["titulo_memorias"];
+                $data["nombre"] = $request["nombre"];
+                $data["primer_apellido"] = $request["primer_apellido"];
+                $data["segundo_apellido"] = $request["segundo_apellido"];
+                $data["titulo_publicacion"] = $request["titulo_publicacion"];
+                $data["de_pagina"] = $request["de_pagina"];
+                $data["a_pagina"] = $request["a_pagina"];
+                $data["year_publicacion"] = $request["year_publicacion"];
+                $data["pais"] = $request["pais"];
+                $data["palabra_clave1"] = $request["palabra_clave1"];
+                $data["palabra_clave2"] = $request["palabra_clave2"];
+                $data["palabra_clave3"] = $request["palabra_clave3"];
+                $data["area"] = $request["area"];
+                $data["campo"] = $request["campo"];
+                $data["disciplina"] = $request["disciplina"];
+                $data["subdisciplina"] = $request["subdisciplina"];
+                $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
+
+                // Asigna el user_id al nuevo curso impartido
+                $data["id_investigador"] = $userId;
+                $response = memorias::create($data);
+                return response()->json($response, 200);
+
+            }
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            //data es un array con los datos del request
+            $data["titulo_memorias"] = $request["titulo_memorias"];
+            $data["nombre"] = $request["nombre"];
+            $data["primer_apellido"] = $request["primer_apellido"];
+            $data["segundo_apellido"] = $request["segundo_apellido"];
+            $data["titulo_publicacion"] = $request["titulo_publicacion"];
+            $data["de_pagina"] = $request["de_pagina"];
+            $data["a_pagina"] = $request["a_pagina"];
+            $data["year_publicacion"] = $request["year_publicacion"];
+            $data["pais"] = $request["pais"];
+            $data["palabra_clave1"] = $request["palabra_clave1"];
+            $data["palabra_clave2"] = $request["palabra_clave2"];
+            $data["palabra_clave3"] = $request["palabra_clave3"];
+            $data["area"] = $request["area"];
+            $data["campo"] = $request["campo"];
+            $data["disciplina"] = $request["disciplina"];
+            $data["subdisciplina"] = $request["subdisciplina"];
+            $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
+
+
+            //se realiza una busqueda por el id y se actualiza
+            memorias::find($id)->update($data);
+
+            //se retorna el objecto ya actualizado traido de la bd
+            $response = memorias::find($id);
+            return response()->json($response, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+
+            memorias::find($id)->delete($id);
+            $res = memorias::find($id);
+            return response()->json("Delete successfully", 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
+    }
+}

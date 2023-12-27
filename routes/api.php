@@ -24,7 +24,12 @@ use App\Http\Controllers\PublicacionCientificaLibrosController;
 use App\Http\Controllers\EvaluacionesConacytController;
 use App\Http\Controllers\EvaluacionesNoConacytController;
 use App\Http\Controllers\DocumentosTrabajoController;
-
+use App\Http\Controllers\RedesTematicasController;
+use App\Http\Controllers\DistincionesConacytController;
+use App\Http\Controllers\DistincionesNoConacytController;
+use App\Http\Controllers\PatentesController;
+use App\Http\Controllers\MemoriasController;
+use App\Http\Controllers\DivulgacionController;
 
 
 use App\Http\Controllers\UsuarioController;
@@ -106,11 +111,30 @@ Route::apiResource('evaluacionesNoConacyt', EvaluacionesNoConacytController::cla
 Route::apiResource('documentosTrabajo', DocumentosTrabajoController::class)->middleware('auth:sanctum');
 
 
+//Redes Temáticas CONACYT
+Route::apiResource('redesTematicas', RedesTematicasController::class)->middleware('auth:sanctum');
+
+//Distinciones CONACYT
+Route::apiResource('distincionesConacyt', DistincionesConacytController::class)->middleware('auth:sanctum');
 
 
+//Distinciones CONACYT
+Route::apiResource('distincionesConacyt', DistincionesConacytController::class)->middleware('auth:sanctum');
 
 
+//Distinciones NO CONACYT
+Route::apiResource('distincionesNoConacyt', DistincionesNoConacytController::class)->middleware('auth:sanctum');
 
+//patentes
+Route::apiResource('patentes', PatentesController::class)->middleware('auth:sanctum');
+
+
+//memorias
+Route::apiResource('memorias', MemoriasController::class)->middleware('auth:sanctum');
+
+
+//Divulgacion
+Route::apiResource('divulgacion', DivulgacionController::class)->middleware('auth:sanctum');
 
 
 
