@@ -30,6 +30,12 @@ use App\Http\Controllers\DistincionesNoConacytController;
 use App\Http\Controllers\PatentesController;
 use App\Http\Controllers\MemoriasController;
 use App\Http\Controllers\DivulgacionController;
+use App\Http\Controllers\OtraFormacionController;
+use App\Http\Controllers\DifusionPublicacionArticulosController;
+use App\Http\Controllers\DifusionPublicacionLibrosController;
+use App\Http\Controllers\IdiomasController;
+use App\Http\Controllers\LenguasIndigenasController;
+use App\Http\Controllers\CertificacionesMedicasController;
 
 
 use App\Http\Controllers\UsuarioController;
@@ -114,8 +120,6 @@ Route::apiResource('documentosTrabajo', DocumentosTrabajoController::class)->mid
 //Redes Temáticas CONACYT
 Route::apiResource('redesTematicas', RedesTematicasController::class)->middleware('auth:sanctum');
 
-//Distinciones CONACYT
-Route::apiResource('distincionesConacyt', DistincionesConacytController::class)->middleware('auth:sanctum');
 
 
 //Distinciones CONACYT
@@ -135,6 +139,27 @@ Route::apiResource('memorias', MemoriasController::class)->middleware('auth:sanc
 
 //Divulgacion
 Route::apiResource('divulgacion', DivulgacionController::class)->middleware('auth:sanctum');
+
+//Otra Formacion
+Route::apiResource('otraFormacion', OtraFormacionController::class)->middleware('auth:sanctum');
+
+//difusion Publicacion Articulos
+Route::apiResource('difusionPublicacionArticulos', DifusionPublicacionArticulosController::class)->middleware('auth:sanctum');
+
+//difusion Publicacion Libros
+Route::apiResource('difusionPublicacionLibros', DifusionPublicacionLibrosController::class)->middleware('auth:sanctum');
+
+//idiomas
+Route::apiResource('idiomas', IdiomasController::class)->middleware('auth:sanctum');
+
+
+//lenguas Indigenas
+Route::apiResource('lenguasIndigenas', LenguasIndigenasController::class)->middleware('auth:sanctum');
+
+
+//Certificaciones Medicas
+Route::apiResource('certificacionesMedicas', CertificacionesMedicasController::class)->middleware('auth:sanctum');
+
 
 
 

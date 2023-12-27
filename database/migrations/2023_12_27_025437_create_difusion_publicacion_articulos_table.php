@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
- 
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('publicacion_cientifica_articulos', function (Blueprint $table) {
+        Schema::create('difusion_publicacion_articulos', function (Blueprint $table) {
             $table->id();
             $table->string('ISSN_impreso', 30);
             $table->string('ISSN_electronico', 30);
@@ -29,16 +31,8 @@ return new class extends Migration
             $table->string('disciplina',30);
             $table->string('subdisciplina',30);
             $table->boolean('apoyo_CONACYT');
-            $table->string('rol_participacion', 30);
-            $table->string('estatus_publicacion', 30);
-            $table->string('objetivo', 30);
-            $table->text('url_cita');
-            $table->string('cita_a', 40);
-            $table->string('cita_b', 40);
-            $table->bigInteger('total_cita');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -48,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('publicacion_cientifica_articulos');
+        Schema::dropIfExists('difusion_publicacion_articulos');
     }
 };
