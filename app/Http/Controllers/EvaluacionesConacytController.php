@@ -31,7 +31,7 @@ class EvaluacionesConacytController extends Controller
                 $data["fecha_aceptacion"] = $request["fecha_aceptacion"];
                 $data["fecha_evaluacion"] = $request["fecha_evaluacion"];
                 $data["descripcion"] = $request["descripcion"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = evaluacionesConacyt::create($data);
                 return response()->json($response, 200);

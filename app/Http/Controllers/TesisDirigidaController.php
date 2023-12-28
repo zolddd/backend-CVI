@@ -37,7 +37,7 @@ class TesisDirigidaController extends Controller
                 $data["disciplina"] = $request["disciplina"];
                 $data["subdisciplina"] = $request["subdisciplina"];
 
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = tesisDirigida::create($data);
                 return response()->json($response, 200);

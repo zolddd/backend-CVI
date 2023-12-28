@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\publicacionCientificaArticulos;
+use App\Models\reviews;
 use Illuminate\Support\Facades\Auth;
 
-class PublicacionCientificaArticulosController extends Controller
+class ReviewsController extends Controller
 {
     public function index()
     {
         try {
-            $data = publicacionCientificaArticulos::get();
+            $data = reviews::get();
             return response()->json($data, 200);
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 500);
@@ -26,17 +26,15 @@ class PublicacionCientificaArticulosController extends Controller
             if (Auth::check()) {
                 // Obtén el ID del usuario autenticado
                 $userId = Auth::id();
-
-                $data["ISSN_impreso"] = $request["ISSN_impreso"];
-                $data["ISSN_electronico"] = $request["ISSN_electronico"];
-                $data["DOI"] = $request["DOI"];
-                $data["nombre_revista"] = $request["nombre_revista"];
-                $data["titulo_articulo"] = $request["titulo_articulo"];
-                $data["num_revista"] = $request["num_revista"];
-                $data["vol_revista"] = $request["vol_revista"];
-                $data["year_publicacion"] = $request["year_publicacion"];
+                $data["titulo"] = $request["titulo"];
+                $data["nombre"] = $request["nombre"];
+                $data["primer_apellido"] = $request["primer_apellido"];
+                $data["segundo_apellido"] = $request["segundo_apellido"];
+                $data["titulo_publicacion"] = $request["titulo_publicacion"];
                 $data["de_pagina"] = $request["de_pagina"];
                 $data["a_pagina"] = $request["a_pagina"];
+                $data["year_publicacion"] = $request["year_publicacion"];
+                $data["pais"] = $request["pais"];
                 $data["palabra_clave1"] = $request["palabra_clave1"];
                 $data["palabra_clave2"] = $request["palabra_clave2"];
                 $data["palabra_clave3"] = $request["palabra_clave3"];
@@ -45,17 +43,10 @@ class PublicacionCientificaArticulosController extends Controller
                 $data["disciplina"] = $request["disciplina"];
                 $data["subdisciplina"] = $request["subdisciplina"];
                 $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
-                $data["rol_participacion"] = $request["rol_participacion"];
-                $data["estatus_publicacion"] = $request["estatus_publicacion"];
-                $data["objetivo"] = $request["objetivo"];
-                $data["url_cita"] = $request["url_cita"];
-                $data["cita_a"] = $request["cita_a"];
-                $data["cita_b"] = $request["cita_b"];
-                $data["total_cita"] = $request["total_cita"];
 
                 // Asigna el user_id 
                 $data["id_investigador"] = $userId;
-                $response = publicacionCientificaArticulos::create($data);
+                $response = reviews::create($data);
                 return response()->json($response, 200);
 
             }
@@ -69,16 +60,15 @@ class PublicacionCientificaArticulosController extends Controller
     {
         try {
             //data es un array con los datos del request
-            $data["ISSN_impreso"] = $request["ISSN_impreso"];
-            $data["ISSN_electronico"] = $request["ISSN_electronico"];
-            $data["DOI"] = $request["DOI"];
-            $data["nombre_revista"] = $request["nombre_revista"];
-            $data["titulo_articulo"] = $request["titulo_articulo"];
-            $data["num_revista"] = $request["num_revista"];
-            $data["vol_revista"] = $request["vol_revista"];
-            $data["year_publicacion"] = $request["year_publicacion"];
+            $data["titulo"] = $request["titulo"];
+            $data["nombre"] = $request["nombre"];
+            $data["primer_apellido"] = $request["primer_apellido"];
+            $data["segundo_apellido"] = $request["segundo_apellido"];
+            $data["titulo_publicacion"] = $request["titulo_publicacion"];
             $data["de_pagina"] = $request["de_pagina"];
             $data["a_pagina"] = $request["a_pagina"];
+            $data["year_publicacion"] = $request["year_publicacion"];
+            $data["pais"] = $request["pais"];
             $data["palabra_clave1"] = $request["palabra_clave1"];
             $data["palabra_clave2"] = $request["palabra_clave2"];
             $data["palabra_clave3"] = $request["palabra_clave3"];
@@ -87,19 +77,11 @@ class PublicacionCientificaArticulosController extends Controller
             $data["disciplina"] = $request["disciplina"];
             $data["subdisciplina"] = $request["subdisciplina"];
             $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
-            $data["rol_participacion"] = $request["rol_participacion"];
-            $data["estatus_publicacion"] = $request["estatus_publicacion"];
-            $data["objetivo"] = $request["objetivo"];
-            $data["url_cita"] = $request["url_cita"];
-            $data["cita_a"] = $request["cita_a"];
-            $data["cita_b"] = $request["cita_b"];
-            $data["total_cita"] = $request["total_cita"];
-
             //se realiza una busqueda por el id y se actualiza
-            publicacionCientificaArticulos::find($id)->update($data);
+            reviews::find($id)->update($data);
 
             //se retorna el objecto ya actualizado traido de la bd
-            $response = publicacionCientificaArticulos::find($id);
+            $response = reviews::find($id);
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
@@ -110,11 +92,9 @@ class PublicacionCientificaArticulosController extends Controller
     public function destroy($id)
     {
         try {
-
-            publicacionCientificaArticulos::find($id)->delete($id);
-            $res = publicacionCientificaArticulos::find($id);
+            reviews::find($id)->delete($id);
+            $res = reviews::find($id);
             return response()->json("Delete successfully", 200);
-
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 500);
         }

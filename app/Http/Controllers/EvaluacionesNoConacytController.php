@@ -38,7 +38,7 @@ class EvaluacionesNoConacytController extends Controller
                 $data["campo"] = $request["campo"];
                 $data["disciplina"] = $request["disciplina"];
                 $data["subdisciplina"] = $request["subdisciplina"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = evaluacionesNoConacyt::create($data);
                 return response()->json($response, 200);

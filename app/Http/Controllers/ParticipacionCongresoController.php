@@ -35,7 +35,7 @@ class ParticipacionCongresoController extends Controller
                 $data["palabra_clave1"] = $request["palabra_clave1"];
                 $data["palabra_clave2"] = $request["palabra_clave2"];
                 $data["palabra_clave3"] = $request["palabra_clave3"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = participacionCongreso::create($data);
                 return response()->json($response, 200);

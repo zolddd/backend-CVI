@@ -46,7 +46,7 @@ class PatentesController extends Controller
                 $data["linea_investigacion"] = $request["linea_investigacion"];
                 $data["numero_solicitud"] = $request["numero_solicitud"];
                 $data["registro_internacional"] = $request["registro_internacional"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = patentes::create($data);
                 return response()->json($response, 200);

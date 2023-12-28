@@ -29,7 +29,7 @@ class DistincionesNoConacytController extends Controller
                 $data["year"] = $request["year"];
                 $data["pais"] = $request["pais"];
                 $data["descripcion_distincion"] = $request["descripcion_distincion"];
-                // Asigna el user_id al nuevo curso impartido
+                /// Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = distincionesNoConacyt::create($data);
                 return response()->json($response, 200);

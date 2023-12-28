@@ -44,7 +44,7 @@ class DocumentosTrabajoController extends Controller
                 $data["subdisciplina"] = $request["subdisciplina"];
                 $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
 
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = documentosTrabajo::create($data);
                 return response()->json($response, 200);

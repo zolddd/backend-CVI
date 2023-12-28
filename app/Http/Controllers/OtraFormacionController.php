@@ -35,7 +35,7 @@ class OtraFormacionController extends Controller
                 $data["campo"] = $request["campo"];
                 $data["disciplina"] = $request["disciplina"];
                 $data["subdisciplina"] = $request["subdisciplina"];
-                // Asigna el user_id a
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = otraFormacion::create($data);
                 return response()->json($response, 200);

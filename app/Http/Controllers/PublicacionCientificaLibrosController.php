@@ -58,7 +58,7 @@ class PublicacionCientificaLibrosController extends Controller
                 $data["cita_a"] = $request["cita_a"];
                 $data["cita_b"] = $request["cita_b"];
                 $data["total_citas"] = $request["total_citas"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = publicacionCientificaLibros::create($data);
                 return response()->json($response, 200);

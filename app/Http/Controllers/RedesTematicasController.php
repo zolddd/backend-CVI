@@ -28,7 +28,7 @@ class RedesTematicasController extends Controller
                 $userId = Auth::id();
                 $data["red_tematica"] = $request["red_tematica"];
                 $data["fecha_ingreso"] = $request["fecha_ingreso"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = redesTematicas::create($data);
                 return response()->json($response, 200);

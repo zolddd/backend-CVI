@@ -27,7 +27,7 @@ class DistincionesConacytController extends Controller
                 $userId = Auth::id();
                 $data["nombre_distincion"] = $request["nombre_distincion"];
                 $data["year"] = $request["year"];
-                // Asigna el user_id al nuevo curso impartido
+                // Asigna el user_id 
                 $data["id_investigador"] = $userId;
                 $response = distincionesConacyt::create($data);
                 return response()->json($response, 200);
