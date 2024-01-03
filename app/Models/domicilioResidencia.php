@@ -26,6 +26,11 @@ class domicilioResidencia extends Model
         "Tipo",
         "Nombre",
         "Descripcion_ubicacion",
+        "id_investigador"
     ];
 
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'id_investigador');
+    }
 }

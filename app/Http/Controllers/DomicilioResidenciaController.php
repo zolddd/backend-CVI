@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\domicilioResidencia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DomicilioResidenciaController extends Controller
 {
@@ -19,26 +20,31 @@ class DomicilioResidenciaController extends Controller
 
     public function store(Request $request)
     {
-        $domicilioResidencia = new domicilioResidencia;
-        $domicilioResidencia-> Pais  = $request -> Pais ;
-        $domicilioResidencia-> Codigo_postal  = $request -> Codigo_postal ;
-        $domicilioResidencia-> Estado = $request -> Estado ;
-        $domicilioResidencia-> Municipio_delegacion = $request -> Municipio_delegacion ;
-        $domicilioResidencia-> Localidad = $request -> Localidad ;
-        $domicilioResidencia-> Asentamiento = $request -> Asentamiento ;
-        $domicilioResidencia-> Tipo_asentamiento = $request -> Tipo_asentamiento ;
-        $domicilioResidencia-> Nombre_asentamiento = $request -> Nombre_asentamiento ;
-        $domicilioResidencia-> Carretera = $request -> Carretera ;
-        $domicilioResidencia-> Nombre_vialidad = $request -> Nombre_vialidad ;
-        $domicilioResidencia-> Parte_numerica1 = $request -> Parte_numerica1 ;
-        $domicilioResidencia-> Numero_exterior_anterior = $request -> Numero_exterior_anterior ;
-        $domicilioResidencia-> Parte_alfanumerica = $request -> Parte_alfanumerica ;
-        $domicilioResidencia-> Parte_numerica2 = $request -> Parte_numerica2 ;
-        $domicilioResidencia-> Tipo = $request -> Tipo ;
-        $domicilioResidencia-> Nombre = $request -> Nombre ;
-        $domicilioResidencia-> Descripcion_ubicacion = $request -> Descripcion_ubicacion;
 
-        $domicilioResidencia->save();
+        if (Auth::check()) {
+            $userId = Auth::id();
+            $domicilioResidencia = new domicilioResidencia;
+            $domicilioResidencia->Pais = $request->Pais;
+            $domicilioResidencia->Codigo_postal = $request->Codigo_postal;
+            $domicilioResidencia->Estado = $request->Estado;
+            $domicilioResidencia->Municipio_delegacion = $request->Municipio_delegacion;
+            $domicilioResidencia->Localidad = $request->Localidad;
+            $domicilioResidencia->Asentamiento = $request->Asentamiento;
+            $domicilioResidencia->Tipo_asentamiento = $request->Tipo_asentamiento;
+            $domicilioResidencia->Nombre_asentamiento = $request->Nombre_asentamiento;
+            $domicilioResidencia->Carretera = $request->Carretera;
+            $domicilioResidencia->Nombre_vialidad = $request->Nombre_vialidad;
+            $domicilioResidencia->Parte_numerica1 = $request->Parte_numerica1;
+            $domicilioResidencia->Numero_exterior_anterior = $request->Numero_exterior_anterior;
+            $domicilioResidencia->Parte_alfanumerica = $request->Parte_alfanumerica;
+            $domicilioResidencia->Parte_numerica2 = $request->Parte_numerica2;
+            $domicilioResidencia->Tipo = $request->Tipo;
+            $domicilioResidencia->Nombre = $request->Nombre;
+            $domicilioResidencia->Descripcion_ubicacion = $request->Descripcion_ubicacion;
+            $domicilioResidencia->id_investigador = $request->$userId;
+            $domicilioResidencia->save();
+        }
+
         return $domicilioResidencia;
     }
 
@@ -49,24 +55,24 @@ class DomicilioResidenciaController extends Controller
         if (!$domicilioResidencia) {
             return response()->json('No se encontró ', 404);
         }
-    
-        $domicilioResidencia-> Pais  = $request -> Pais ;
-        $domicilioResidencia-> Codigo_postal  = $request -> Codigo_postal ;
-        $domicilioResidencia-> Estado = $request -> Estado ;
-        $domicilioResidencia-> Municipio_delegacion = $request -> Municipio_delegacion ;
-        $domicilioResidencia-> Localidad = $request -> Localidad ;
-        $domicilioResidencia-> Asentamiento = $request -> Asentamiento ;
-        $domicilioResidencia-> Tipo_asentamiento = $request -> Tipo_asentamiento ;
-        $domicilioResidencia-> Nombre_asentamiento = $request -> Nombre_asentamiento ;
-        $domicilioResidencia-> Carretera = $request -> Carretera ;
-        $domicilioResidencia-> Nombre_vialidad = $request -> Nombre_vialidad ;
-        $domicilioResidencia-> Parte_numerica1 = $request -> Parte_numerica1 ;
-        $domicilioResidencia-> Numero_exterior_anterior = $request -> Numero_exterior_anterior ;
-        $domicilioResidencia-> Parte_alfanumerica = $request -> Parte_alfanumerica ;
-        $domicilioResidencia-> Parte_numerica2 = $request -> Parte_numerica2 ;
-        $domicilioResidencia-> Tipo = $request -> Tipo ;
-        $domicilioResidencia-> Nombre = $request -> Nombre ;
-        $domicilioResidencia-> Descripcion_ubicacion = $request -> Descripcion_ubicacion;
+
+        $domicilioResidencia->Pais = $request->Pais;
+        $domicilioResidencia->Codigo_postal = $request->Codigo_postal;
+        $domicilioResidencia->Estado = $request->Estado;
+        $domicilioResidencia->Municipio_delegacion = $request->Municipio_delegacion;
+        $domicilioResidencia->Localidad = $request->Localidad;
+        $domicilioResidencia->Asentamiento = $request->Asentamiento;
+        $domicilioResidencia->Tipo_asentamiento = $request->Tipo_asentamiento;
+        $domicilioResidencia->Nombre_asentamiento = $request->Nombre_asentamiento;
+        $domicilioResidencia->Carretera = $request->Carretera;
+        $domicilioResidencia->Nombre_vialidad = $request->Nombre_vialidad;
+        $domicilioResidencia->Parte_numerica1 = $request->Parte_numerica1;
+        $domicilioResidencia->Numero_exterior_anterior = $request->Numero_exterior_anterior;
+        $domicilioResidencia->Parte_alfanumerica = $request->Parte_alfanumerica;
+        $domicilioResidencia->Parte_numerica2 = $request->Parte_numerica2;
+        $domicilioResidencia->Tipo = $request->Tipo;
+        $domicilioResidencia->Nombre = $request->Nombre;
+        $domicilioResidencia->Descripcion_ubicacion = $request->Descripcion_ubicacion;
 
         $domicilioResidencia->update();
         return $domicilioResidencia;
@@ -79,9 +85,9 @@ class DomicilioResidenciaController extends Controller
         if (!$domicilioResidencia) {
             return response()->json('No se encontró ', 404);
         }
-    
+
         $domicilioResidencia->delete();
         return response()->json('Eliminado correctamente', 200);
     }
-    
+
 }

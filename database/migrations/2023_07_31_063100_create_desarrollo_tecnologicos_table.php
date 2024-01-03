@@ -34,12 +34,6 @@ return new class extends Migration
             // estableciendo relacion del desarollo tecnologico con el usuario
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
-
-            //    // estableciendo relacion de la innovacion con el desarollo tecnologico 
-            //    $table->unsignedBigInteger('id_innovacion')->nullable();
-            //    $table->foreign('id_innovacion')->references('id')->on('innovaions')->onDelete('cascade');
-
-
             $table->timestamps();
         });
     }

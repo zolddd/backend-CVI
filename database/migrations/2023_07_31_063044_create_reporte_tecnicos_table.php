@@ -20,14 +20,11 @@ return new class extends Migration {
             $table->tinyText('descripcion');
             $table->tinyText('objetivos');
             $table->tinyText('palabras_claves');
-
-            // estableciendo relacion con el usuario
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
     public function down(): void
     {
         Schema::dropIfExists('reporte_tecnicos');

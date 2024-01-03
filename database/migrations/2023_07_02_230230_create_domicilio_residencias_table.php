@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('Tipo', 15);
             $table->string('Nombre', 15);
             $table->string('Descripcion_ubicacion', 255);
+            $table->unsignedBigInteger('id_investigador')->nullable();
+            $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
         });
     }

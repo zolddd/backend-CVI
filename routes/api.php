@@ -88,7 +88,7 @@ Route::apiResource('proyectosInvestigacion', ProyectosInvestigacionController::c
 
 
 //estancias Investigacion
-Route::apiResource('estanciasInvestigacion', EstanciasInvestigacionController::class)->middleware('auth:sanctum');
+Route::apiResource('estanciasInvestigacion', EstanciasInvestigacionController::class);
 
 
 //Publicacion Cientifica de Articulos
