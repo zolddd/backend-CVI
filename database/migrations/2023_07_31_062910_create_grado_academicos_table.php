@@ -13,15 +13,15 @@ return new class extends Migration {
         Schema::create('grado_academicos', function (Blueprint $table) {
             $table->id();
             $table->string('Titulo', 25);
-            $table->enum('Nivel_escolaridad', ['preparatoria', 'licenciatura', 'ingeniería', 'maestría', 'doctorado'])->default('licenciatura');
-            $table->enum('Estatus', ['Activo', 'Inactivo', 'En proceso'])->default('Inactivo');
-            $table->string('Area', 25);
-            $table->string('Campo', 25);
-            $table->string('Disciplina', 25);
-            $table->string('Subdisciplina', 25);
-            $table->string('Cedula', 25);
-            $table->string('Opciones_Titulacion', 25);
-            $table->date('Fecha_Obtencion');
+            $table->string('Nivel_escolaridad');
+            $table->string('Estatus');
+            $table->string('Area');
+            $table->string('Campo');
+            $table->string('Disciplina');
+            $table->string('Subdisciplina');
+            $table->string('Cedula')->nullable();
+            $table->string('Opciones_Titulacion')->nullable();
+            $table->date('Fecha_Obtencion')->nullable();
             $table->tinyText('Institucion');
             // estableciendo relacion con el usuario
             $table->unsignedBigInteger('id_investigador')->nullable();

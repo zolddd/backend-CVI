@@ -11,6 +11,7 @@ return new class extends Migration
     {
         Schema::create('diplomados_impartidos', function (Blueprint $table) {
             $table->id();
+            $table->string('Institucion', 30);
             $table->string('Nombre_diplomado');
             $table->string('Nombre_curso');
             $table->year('AÑO');

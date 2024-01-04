@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('disciplina',30);
             $table->string('subdisciplina',30);
             $table->boolean('apoyo_CONACYT');
+            $table->string('fondo');
             $table->string('rol_participacion', 30);
             $table->string('estatus_publicacion', 30);
             $table->string('objetivo', 30);

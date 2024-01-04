@@ -21,17 +21,19 @@ class GradoAcademicoController extends Controller
             // Obtén el ID del usuario autenticado
             $userId = Auth::id();
             // Validar la solicitud
+
+
             $request->validate([
-                'Titulo' => 'required|string|max:25',
-                'Nivel_escolaridad' => 'required|in:preparatoria,licenciatura,ingeniería,maestría,doctorado',
-                'Estatus' => 'required|in:Activo,Inactivo,En proceso',
-                'Area' => 'required|string|max:25',
-                'Campo' => 'required|string|max:25',
-                'Disciplina' => 'required|string|max:25',
-                'Subdisciplina' => 'required|string|max:25',
-                'Cedula' => 'required|string|max:25',
-                'Opciones_Titulacion' => 'required|string|max:25',
-                'Fecha_Obtencion' => 'required|date',
+                'Titulo' => 'required|string',
+                'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
+                'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
+                'Area' => 'required|string',
+                'Campo' => 'required|string',
+                'Disciplina' => 'required|string',
+                'Subdisciplina' => 'required|string',
+                'Cedula',
+                'Opciones_Titulacion',
+                'Fecha_Obtencion',
                 'Institucion' => 'required|string',
             ]);
 
@@ -54,7 +56,8 @@ class GradoAcademicoController extends Controller
             // Guardar el nuevo grado académico en la base de datos.
             $gradoAcademico->save();
 
-            return $gradoAcademico;
+
+            return response()->json($gradoAcademico, 200);
         }
 
     }
@@ -75,20 +78,21 @@ class GradoAcademicoController extends Controller
 
         // Validar la solicitud
         $request->validate([
-            'Titulo' => 'required|string|max:25',
-            'Nivel_escolaridad' => 'required|in:preparatoria,licenciatura,ingeniería,maestría,doctorado',
-            'Estatus' => 'required|in:Activo,Inactivo,En proceso',
-            'Area' => 'required|string|max:25',
-            'Campo' => 'required|string|max:25',
-            'Disciplina' => 'required|string|max:25',
-            'Subdisciplina' => 'required|string|max:25',
-            'Cedula' => 'required|string|max:25',
-            'Opciones_Titulacion' => 'required|string|max:25',
-            'Fecha_Obtencion' => 'required|date',
+            'Titulo' => 'required|string',
+            'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
+            'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
+            'Area' => 'required|string',
+            'Campo' => 'required|string',
+            'Disciplina' => 'required|string',
+            'Subdisciplina' => 'required|string',
+            'Cedula',
+            'Opciones_Titulacion',
+            'Fecha_Obtencion',
             'Institucion' => 'required|string',
         ]);
 
-        // Actualizar los campos del registro
+        // Crear una nueva instancia del modelo gradoAcademico y asignar los valores de los campos.
+        $gradoAcademico = new gradoAcademico;
         $gradoAcademico->Titulo = $request->input('Titulo');
         $gradoAcademico->Nivel_escolaridad = $request->input('Nivel_escolaridad');
         $gradoAcademico->Estatus = $request->input('Estatus');

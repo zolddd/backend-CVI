@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('idiomas', function (Blueprint $table) {
             $table->id();
-            $table->string('institucion', 30);
+            $table->string('institucion');
             $table->string('idioma', 30);
             $table->string('grado_dominio', 30);
             $table->string('nivel_conversacion', 30);
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('vigencia_de');
             $table->date('vigencia_a');
             $table->bigInteger('puntos');
-            $table->bigInteger('nivel');
+            $table->string('nivel');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
