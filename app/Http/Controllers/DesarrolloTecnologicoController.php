@@ -12,8 +12,18 @@ class DesarrolloTecnologicoController extends Controller
     public function index()
     {
         try {
-            $data = desarrolloTecnologico::get();
-            return response()->json($data, 200);
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = desarrolloTecnologico::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 500);
         }
@@ -33,17 +43,26 @@ class DesarrolloTecnologicoController extends Controller
                 $data["Objetivo"] = $request["Objetivo"];
                 $data["Resumen"] = $request["Resumen"];
                 $data["Rol"] = $request["Rol"];
+                $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
+                $data["Sector_SCIAN"] = $request["Sector_SCIAN"];
+                $data["Subsector_SCIAN"] = $request["Subsector_SCIAN"];
+                $data["Rama_SCIAN"] = $request["Rama_SCIAN"];
+                $data["Subrama_SCIAN"] = $request["Subrama_SCIAN"];
+                $data["Clase_SCIAN"] = $request["Clase_SCIAN"];
+                $data["Sector_OCDE"] = $request["Sector_OCDE"];
+                $data["Division_OCDE"] = $request["Division_OCDE"];
+                $data["Grupo_OCDE"] = $request["Grupo_OCDE"];
+                $data["Clase_OCDE"] = $request["Clase_OCDE"];
                 $data["Area"] = $request["Area"];
                 $data["Campo"] = $request["Campo"];
                 $data["Disciplina"] = $request["Disciplina"];
                 $data["Subdisciplina"] = $request["Subdisciplina"];
-
                 $data["Generacion_valor"] = $request["Generacion_valor"];
                 $data["Formacion_RRHH"] = $request["Formacion_RRHH"];
-                $data["Id-Usuario_beneficiario"] = $request["Id-Usuario_beneficiario"];
+                $data["Id_usuario_beneficiario"] = $request["Id-Id_usuario_beneficiario"];
                 $data["Aplicacion_conocimeinto"] = $request["Aplicacion_conocimeinto"];
-                $data["Teorico-practico_original"] = $request["Teorico-practico_original"];
-                $data["Id-Innvacion_implementado"] = $request["Id-Innvacion_implementado"];
+                $data["Teorico_practico_original"] = $request["Teorico_practico_original"];
+                $data["Id_innvacion_implementado"] = $request["Id_innvacion_implementado"];
                 $data["Problema_resuelve"] = $request["Problema_resuelve"];
                 $data["Analisis_pertenencia"] = $request["Analisis_pertenencia"];
                 $data["Linea_investigacion"] = $request["Linea_investigacion"];
@@ -75,17 +94,26 @@ class DesarrolloTecnologicoController extends Controller
             $data["Objetivo"] = $request["Objetivo"];
             $data["Resumen"] = $request["Resumen"];
             $data["Rol"] = $request["Rol"];
+            $data["apoyo_CONACYT"] = $request["apoyo_CONACYT"];
+            $data["Sector_SCIAN"] = $request["Sector_SCIAN"];
+            $data["Subsector_SCIAN"] = $request["Subsector_SCIAN"];
+            $data["Rama_SCIAN"] = $request["Rama_SCIAN"];
+            $data["Subrama_SCIAN"] = $request["Subrama_SCIAN"];
+            $data["Clase_SCIAN"] = $request["Clase_SCIAN"];
+            $data["Sector_OCDE"] = $request["Sector_OCDE"];
+            $data["Division_OCDE"] = $request["Division_OCDE"];
+            $data["Grupo_OCDE"] = $request["Grupo_OCDE"];
+            $data["Clase_OCDE"] = $request["Clase_OCDE"];
             $data["Area"] = $request["Area"];
             $data["Campo"] = $request["Campo"];
             $data["Disciplina"] = $request["Disciplina"];
             $data["Subdisciplina"] = $request["Subdisciplina"];
-
             $data["Generacion_valor"] = $request["Generacion_valor"];
             $data["Formacion_RRHH"] = $request["Formacion_RRHH"];
-            $data["Id.Usuario_beneficiario"] = $request["Id.Usuario_beneficiario"];
+            $data["Id_usuario_beneficiario"] = $request["Id-Id_usuario_beneficiario"];
             $data["Aplicacion_conocimeinto"] = $request["Aplicacion_conocimeinto"];
-            $data["Teorico-practico_original"] = $request["Teorico-practico_original"];
-            $data["Id.Innvacion_implementado"] = $request["Id.Innvacion_implementado"];
+            $data["Teorico_practico_original"] = $request["Teorico_practico_original"];
+            $data["Id_innvacion_implementado"] = $request["Id_innvacion_implementado"];
             $data["Problema_resuelve"] = $request["Problema_resuelve"];
             $data["Analisis_pertenencia"] = $request["Analisis_pertenencia"];
             $data["Linea_investigacion"] = $request["Linea_investigacion"];

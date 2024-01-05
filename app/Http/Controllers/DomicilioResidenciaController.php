@@ -10,7 +10,22 @@ class DomicilioResidenciaController extends Controller
 {
     public function index()
     {
-        return domicilioResidencia::all();
+        try {
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = domicilioResidencia::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
     public function show(domicilioResidencia $domicilioResidencia)
@@ -45,7 +60,7 @@ class DomicilioResidenciaController extends Controller
             $domicilioResidencia->save();
         }
 
-        return $domicilioResidencia;
+        return response()->json($domicilioResidencia, 200);
     }
 
     public function update(Request $request, $id)
@@ -75,7 +90,7 @@ class DomicilioResidenciaController extends Controller
         $domicilioResidencia->Descripcion_ubicacion = $request->Descripcion_ubicacion;
 
         $domicilioResidencia->update();
-        return $domicilioResidencia;
+        return response()->json($domicilioResidencia, 200);
     }
 
     public function destroy($id)

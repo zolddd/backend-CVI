@@ -11,7 +11,22 @@ class GradoAcademicoController extends Controller
 
     public function index()
     {
-        return gradoAcademico::all();
+        try {
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = gradoAcademico::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
@@ -107,9 +122,7 @@ class GradoAcademicoController extends Controller
 
         // Guardar los cambios en la base de datos.
         $gradoAcademico->update();
-
-        // Devolver el objeto actualizado en la respuesta.
-        return $gradoAcademico;
+        return response()->json($gradoAcademico, 200);
     }
 
     public function destroy($id)

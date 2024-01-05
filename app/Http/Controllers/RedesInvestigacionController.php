@@ -2,17 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\redesInvestigacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\gruposInvestigacion;
+
 
 class RedesInvestigacionController extends Controller
 {
     public function index()
     {
         try {
-            $data = gruposInvestigacion::get();
-            return response()->json($data, 200);
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = redesInvestigacion::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
         } catch (\Throwable $th) {
             return response()->json(["error" => $th->getMessage()], 500);
         }
@@ -40,7 +51,7 @@ class RedesInvestigacionController extends Controller
                 $data["subdisciplina"] = $request["subdisciplina"];
                 // Asigna el user_id 
                 $data["id_investigador"] = $userId;
-                $response = gruposInvestigacion::create($data);
+                $response = redesInvestigacion::create($data);
                 return response()->json($response, 200);
 
             }
@@ -68,10 +79,10 @@ class RedesInvestigacionController extends Controller
             $data["subdisciplina"] = $request["subdisciplina"];
 
             //se realiza una busqueda por el id y se actualiza
-            gruposInvestigacion::find($id)->update($data);
+            redesInvestigacion::find($id)->update($data);
 
             //se retorna el objecto ya actualizado traido de la bd
-            $response = gruposInvestigacion::find($id);
+            $response = redesInvestigacion::find($id);
             return response()->json($response, 200);
 
         } catch (\Throwable $th) {
@@ -82,8 +93,8 @@ class RedesInvestigacionController extends Controller
     public function destroy($id)
     {
         try {
-            gruposInvestigacion::find($id)->delete($id);
-            $res = gruposInvestigacion::find($id);
+            redesInvestigacion::find($id)->delete($id);
+            $res = redesInvestigacion::find($id);
             return response()->json("Delete successfully", 200);
 
         } catch (\Throwable $th) {

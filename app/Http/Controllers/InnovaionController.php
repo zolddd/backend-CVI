@@ -11,10 +11,20 @@ class InnovaionController extends Controller
     public function index()
     {
         try {
-            $data = innovaion::get();
-            return response()->json($data,200);
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = innovaion::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
         } catch (\Throwable $th) {
-            return response()->json(["error" => $th->getMessage()],500);
+            return response()->json(["error" => $th->getMessage()], 500);
         }
     }
 

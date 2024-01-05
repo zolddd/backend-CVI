@@ -13,7 +13,22 @@ class DocumentoTrabajoController extends Controller
 
     public function index()
     {
-        return documentoTrabajo::all();
+        try {
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = documentoTrabajo::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
@@ -58,14 +73,14 @@ class DocumentoTrabajoController extends Controller
 
             $documentoTrabajo->id_investigador = $userId;
             $documentoTrabajo->save();
-            return response()->json($documentoTrabajo);
+            return response()->json($documentoTrabajo, 200);
         }
     }
 
 
     public function show(documentoTrabajo $documentoTrabajo)
     {
-        return $documentoTrabajo;
+        return response()->json($documentoTrabajo, 200);
     }
 
     
@@ -112,7 +127,7 @@ class DocumentoTrabajoController extends Controller
 
         $documentoTrabajo->update();
 
-        return response()->json($documentoTrabajo);
+        return response()->json($documentoTrabajo, 200);
     }
    
     public function destroy($id)

@@ -11,7 +11,22 @@ class ExperienciaLaboralController extends Controller
 
     public function index()
     {
-        return experienciaLaboral::all();
+        try {
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = experienciaLaboral::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
@@ -48,7 +63,8 @@ class ExperienciaLaboralController extends Controller
             $experienciaLaboral->id_investigador = $userId;
 
             $experienciaLaboral->save();
-            return response()->json($experienciaLaboral);
+            return response()->json($experienciaLaboral, 200);
+            
         }
     }
 

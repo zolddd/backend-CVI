@@ -10,7 +10,22 @@ class ReporteTecnicoController extends Controller
 {
     public function index()
     {
-        return reporteTecnico::all();
+        try {
+            if (Auth::check()) {
+                // ID del usuario autenticado
+                $userId = Auth::id();
+
+                // Filtra los datos por el ID del usuario
+                $data = reporteTecnico::where('user_id', $userId)->get();
+
+                return response()->json($data, 200);
+            } else {
+                // El usuario no está autenticado
+                return response()->json(["error" => "Usuario no autenticado"], 401);
+            }
+        } catch (\Throwable $th) {
+            return response()->json(["error" => $th->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
@@ -52,7 +67,8 @@ class ReporteTecnicoController extends Controller
             $reporteTecnico->save();
 
             // Puedes devolver una respuesta o redirigir a otra página
-            return $reporteTecnico;
+
+            return response()->json($reporteTecnico, 200);
         }
     }
 
@@ -93,7 +109,7 @@ class ReporteTecnicoController extends Controller
         $reporteTecnico->palabras_claves = $request->input('palabras_claves');
 
         $reporteTecnico->update();
-        return response()->json($reporteTecnico);
+        return response()->json($reporteTecnico, 200);
     }
 
     public function destroy($id)
