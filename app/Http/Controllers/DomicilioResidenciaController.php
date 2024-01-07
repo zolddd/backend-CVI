@@ -16,7 +16,7 @@ class DomicilioResidenciaController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = domicilioResidencia::where('user_id', $userId)->get();
+                $data = domicilioResidencia::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {
@@ -56,7 +56,7 @@ class DomicilioResidenciaController extends Controller
             $domicilioResidencia->Tipo = $request->Tipo;
             $domicilioResidencia->Nombre = $request->Nombre;
             $domicilioResidencia->Descripcion_ubicacion = $request->Descripcion_ubicacion;
-            $domicilioResidencia->id_investigador = $request->$userId;
+            $domicilioResidencia->id_investigador = $userId;
             $domicilioResidencia->save();
         }
 

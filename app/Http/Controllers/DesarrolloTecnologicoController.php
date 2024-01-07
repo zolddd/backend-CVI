@@ -17,7 +17,7 @@ class DesarrolloTecnologicoController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = desarrolloTecnologico::where('user_id', $userId)->get();
+                $data = desarrolloTecnologico::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {
@@ -69,9 +69,6 @@ class DesarrolloTecnologicoController extends Controller
 
                 // Asigna el user_id al desarollo
                 $data["id_investigador"] = $userId;
-
-                // // Asigna el id_innovacion al desarollo
-                // $data["id_innovacion"] = $request["id_innovacion"];
 
                 $response = desarrolloTecnologico::create($data);
 

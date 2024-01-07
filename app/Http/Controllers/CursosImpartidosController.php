@@ -16,7 +16,7 @@ class CursosImpartidosController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = cursosImpartidos::where('user_id', $userId)->get();
+                $data = cursosImpartidos::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

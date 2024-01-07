@@ -16,7 +16,7 @@ class ParticipacionCongresoController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = participacionCongreso::where('user_id', $userId)->get();
+                $data = participacionCongreso::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {
@@ -34,9 +34,8 @@ class ParticipacionCongresoController extends Controller
         try {
 
             if (Auth::check()) {
-                // Obtén el ID del usuario autenticado
-                $userId = Auth::id();
 
+                $userId = Auth::id();
                 $data["nombre_congreso"] = $request["nombre_congreso"];
                 $data["titulo_trabajo"] = $request["titulo_trabajo"];
                 $data["participacion_congreso"] = $request["participacion_congreso"];

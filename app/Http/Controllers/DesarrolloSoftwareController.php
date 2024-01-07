@@ -17,7 +17,7 @@ class DesarrolloSoftwareController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = desarrolloSoftware::where('user_id', $userId)->get();
+                $data = desarrolloSoftware::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {
@@ -34,7 +34,6 @@ class DesarrolloSoftwareController extends Controller
     {
         try {
             if (Auth::check()) {
-                // Obtén el ID del usuario autenticado
                 $userId = Auth::id();
                 $data["Titulo"] = $request["Titulo"];
                 $data["Tipo_desarrollo"] = $request["Tipo_desarrollo"];

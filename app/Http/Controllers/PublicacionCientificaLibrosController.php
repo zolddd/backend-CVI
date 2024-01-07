@@ -16,7 +16,7 @@ class PublicacionCientificaLibrosController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = publicacionCientificaLibros::where('user_id', $userId)->get();
+                $data = publicacionCientificaLibros::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

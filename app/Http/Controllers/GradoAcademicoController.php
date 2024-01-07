@@ -17,7 +17,7 @@ class GradoAcademicoController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = gradoAcademico::where('user_id', $userId)->get();
+                $data = gradoAcademico::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

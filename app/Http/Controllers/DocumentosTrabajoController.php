@@ -16,7 +16,7 @@ class DocumentosTrabajoController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = documentosTrabajo::where('user_id', $userId)->get();
+                $data = documentosTrabajo::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

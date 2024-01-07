@@ -16,7 +16,7 @@ class OtraFormacionController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = otraFormacion::where('user_id', $userId)->get();
+                $data = otraFormacion::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

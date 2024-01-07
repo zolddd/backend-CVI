@@ -16,7 +16,7 @@ class PatentesController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = patentes::where('user_id', $userId)->get();
+                $data = patentes::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {

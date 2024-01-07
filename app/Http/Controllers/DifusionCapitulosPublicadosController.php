@@ -16,7 +16,7 @@ class DifusionCapitulosPublicadosController extends Controller
                 $userId = Auth::id();
 
                 // Filtra los datos por el ID del usuario
-                $data = difusionCapitulosPublicados::where('user_id', $userId)->get();
+                $data = difusionCapitulosPublicados::where('id_investigador', $userId)->get();
 
                 return response()->json($data, 200);
             } else {
