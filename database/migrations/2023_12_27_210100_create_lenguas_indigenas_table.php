@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('lenguas_indigenas', function (Blueprint $table) {
             $table->id();
-            $table->string('lengua', 30);
-            $table->string('grado_dominio', 30);
-            $table->string('nivel_conversacion', 30);
+            $table->string('lengua');
+            $table->string('grado_dominio');
+            $table->string('nivel_conversacion');
             $table->string('nivel_lectura');
             $table->string('nivel_escritura');
             $table->boolean('certificacion');
             $table->date('fecha_evaluacion');
-            $table->string('documento_probatorio', 30);
+            $table->string('documento_probatorio');
             $table->date('vigencia_de');
             $table->date('vigencia_a');
             $table->bigInteger('puntos');

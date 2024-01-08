@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('evaluaciones_no_conacyt', function (Blueprint $table) {
             $table->id();
-            $table->string('institucion', 30);
+            $table->string('institucion');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->string('cargo', 30);
-            $table->string('tipo_evaluacion', 30);
-            $table->string('producto_evaluado', 30);
+            $table->string('cargo');
+            $table->string('tipo_evaluacion');
+            $table->string('producto_evaluado');
             $table->string('nombre_producto_evaluado', 30);
             $table->text('descripcion_actividad');
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',30);
-            $table->string('subdisciplina',30);
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

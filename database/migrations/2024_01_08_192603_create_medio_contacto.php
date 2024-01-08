@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('redes_tematicas', function (Blueprint $table) {
+        Schema::create('medio_contacto', function (Blueprint $table) {
             $table->id();
-            $table->string('red_tematica');
-            $table->date('fecha_ingreso');
+            $table->string('medio_contacto');
+            $table->string('categoria_contacto');
+            $table->string('valor');
+            $table->string('principal');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('redes_tematicas');
+        Schema::dropIfExists('medio_contacto');
     }
 };

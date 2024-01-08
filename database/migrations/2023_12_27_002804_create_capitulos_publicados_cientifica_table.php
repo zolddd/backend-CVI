@@ -15,25 +15,25 @@ return new class extends Migration
 
             //Científica- Capítulos publicados
             $table->id();
-            $table->string('ISBN', 30);
-            $table->string('titulo_libro', 30);
-            $table->string('editorial', 30);
+            $table->string('ISBN');
+            $table->string('titulo_libro');
+            $table->string('editorial');
             $table->bigInteger('numero_edicion');
             $table->bigInteger('year_publicacion');
-            $table->string('titulo_capitulo', 30);
+            $table->string('titulo_capitulo');
             $table->bigInteger('numero_capitulo');
             $table->bigInteger('de_pagina');
             $table->bigInteger('a_pagina');
-            $table->string('DOI', 30);
+            $table->string('DOI');
             $table->text('resumen');
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',30);
-            $table->string('subdisciplina',30);
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->boolean('apoyo_CONACYT');
-            $table->string('rol_participacion', 30);
-            $table->string('estatus_publicacion', 30);
-            $table->string('objetivo', 30);
+            $table->string('rol_participacion');
+            $table->string('estatus_publicacion');
+            $table->string('objetivo');
             $table->boolean('dictaminado');
             $table->text('url_cita');
             $table->text('cita_a');

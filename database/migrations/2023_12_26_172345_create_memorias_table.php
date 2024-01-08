@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('memorias', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_memorias', 30);
-            $table->string('nombre', 25);
-            $table->string('primer_apellido', 25);
-            $table->string('segundo_apellido', 25);
-            $table->string('titulo_publicacion', 30);
+            $table->string('titulo_memorias');
+            $table->string('nombre');
+            $table->string('primer_apellido');
+            $table->string('segundo_apellido');
+            $table->string('titulo_publicacion');
             $table->bigInteger('de_pagina');
             $table->bigInteger('a_pagina');
             $table->bigInteger('year_publicacion');
-            $table->string('pais', 30);
-            $table->string('palabra_clave1',30);
-            $table->string('palabra_clave2',30);
-            $table->string('palabra_clave3',30);
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',30);
-            $table->string('subdisciplina',30);
+            $table->string('pais');
+            $table->string('palabra_clave1');
+            $table->string('palabra_clave2');
+            $table->string('palabra_clave3');
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->boolean('apoyo_CONACYT');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');

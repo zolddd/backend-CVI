@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('participacion_congreso', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_congreso', 30);
-            $table->string('titulo_trabajo', 30);
-            $table->string('participacion_congreso', 30);
-            $table->string('pais',25);
+            $table->string('nombre_congreso');
+            $table->string('titulo_trabajo');
+            $table->string('participacion_congreso');
+            $table->string('pais');
             $table->date('fecha');
-            $table->string('palabra_clave1',30);
-            $table->string('palabra_clave2',30);
-            $table->string('palabra_clave3',30);
+            $table->string('palabra_clave1');
+            $table->string('palabra_clave2');
+            $table->string('palabra_clave3');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();

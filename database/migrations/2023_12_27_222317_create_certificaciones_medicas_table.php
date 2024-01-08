@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('certificaciones_medicas', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('folio');
-            $table->string('consejo', 30);
-            $table->string('especialidad', 30);
+            $table->string('consejo');
+            $table->string('especialidad');
             $table->date('vigencia_de');
             $table->date('vigencia_a');
-            $table->string('tipo_certificacion', 30);
+            $table->string('tipo_certificacion');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

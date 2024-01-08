@@ -11,15 +11,15 @@ return new class extends Migration
     {
         Schema::create('tesis_dirigida', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_autor', 25);
-            $table->string('primer_apellido_autor', 25);
-            $table->string('segundo_apellido_autor', 25);
-            $table->string('grado_academico', 25);
-            $table->string('rol_participacion', 25);
-            $table->string('area', 25);
-            $table->string('campo',25);
-            $table->string('disciplina',25);
-            $table->string('subdisciplina',25);
+            $table->string('nombre_autor');
+            $table->string('primer_apellido_autor');
+            $table->string('segundo_apellido_autor');
+            $table->string('grado_academico');
+            $table->string('rol_participacion');
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

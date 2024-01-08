@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('divulgacion', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo_trabajo', 30);
-            $table->string('tipo_participacion', 25);
-            $table->string('tipo_evento', 25);
+            $table->string('titulo_trabajo');
+            $table->string('tipo_participacion');
+            $table->string('tipo_evento');
             $table->string('institucion_organizadora', 25);
-            $table->string('dirigido_a', 25);
+            $table->string('dirigido_a');
             $table->date('fecha');
-            $table->string('tipo_divulgacion', 25);
-            $table->string('tipo_medio', 25);
-            $table->string('palabra_clave1',30);
-            $table->string('palabra_clave2',30);
-            $table->string('palabra_clave3',30);
+            $table->string('tipo_divulgacion');
+            $table->string('tipo_medio');
+            $table->string('palabra_clave1');
+            $table->string('palabra_clave2');
+            $table->string('palabra_clave3');
             $table->text('notas');
             $table->text('producto_obtenido');            
             $table->unsignedBigInteger('id_investigador')->nullable();

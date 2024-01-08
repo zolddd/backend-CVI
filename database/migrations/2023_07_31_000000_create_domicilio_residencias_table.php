@@ -13,22 +13,22 @@ return new class extends Migration
     {
         Schema::create('domicilio_residencias', function (Blueprint $table) {
             $table->id();
-            $table->string('Pais', 20);
+            $table->string('Pais');
             $table->integer('Codigo_postal');
-            $table->string('Estado', 20);
-            $table->string('Municipio_delegacion', 20);
-            $table->string('Localidad', 20);
-            $table->string('Asentamiento', 20);
-            $table->string('Tipo_asentamiento', 15);
-            $table->string('Nombre_asentamiento', 30);
-            $table->string('Carretera', 20);
-            $table->string('Nombre_vialidad', 20);
+            $table->string('Estado');
+            $table->string('Municipio_delegacion');
+            $table->string('Localidad');
+            $table->string('Asentamiento');
+            $table->string('Tipo_asentamiento');
+            $table->string('Nombre_asentamiento');
+            $table->string('Carretera');
+            $table->string('Nombre_vialidad');
             $table->integer('Parte_numerica1');
             $table->integer('Numero_exterior_anterior');
             $table->char('Parte_alfanumerica', 1);
             $table->integer('Parte_numerica2');
-            $table->string('Tipo', 15);
-            $table->string('Nombre', 15);
+            $table->string('Tipo');
+            $table->string('Nombre');
             $table->string('Descripcion_ubicacion', 255);
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');

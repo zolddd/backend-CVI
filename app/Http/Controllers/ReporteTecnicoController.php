@@ -32,18 +32,17 @@ class ReporteTecnicoController extends Controller
     {
 
         // Valida los datos del formulario (opcional)
-        $validatedData = $request->validate([
-            'titulo' => 'required|string|max:25',
-            'institucion' => 'required|string',
-            'fecha_entrega' => 'required|date',
-            'fecha_publicacion' => 'required|date',
-            'nombramiento' => 'required|string|max:25',
-            'numero_paginas' => 'required|string',
-            'origen' => 'required|string|max:15',
-            'descripcion' => 'required|string',
-            'objetivos' => 'required|string',
-            'palabras_claves' => 'required|string',
-        ]);
+        // $validatedData = $request->validate([
+        //     'titulo' => 'required|string|max:25',
+        //     'institucion' => 'required|string',
+        //     'fecha_entrega' => 'required|date',
+        //     'fecha_publicacion' => 'required|date',
+        //     'numero_paginas' => 'required|string',
+        //     'origen' => 'required|string|max:15',
+        //     'descripcion' => 'required|string',
+        //     'objetivos' => 'required|string',
+        //     'palabras_claves' => 'required|string',
+        // ]);
 
         if (Auth::check()) {
             // Obtén el ID del usuario autenticado
@@ -54,12 +53,16 @@ class ReporteTecnicoController extends Controller
             $reporteTecnico->institucion = $request->institucion;
             $reporteTecnico->fecha_entrega = $request->fecha_entrega;
             $reporteTecnico->fecha_publicacion = $request->fecha_publicacion;
-            $reporteTecnico->nombramiento = $request->nombramiento;
             $reporteTecnico->numero_paginas = $request->numero_paginas;
             $reporteTecnico->origen = $request->origen;
             $reporteTecnico->descripcion = $request->descripcion;
             $reporteTecnico->objetivos = $request->objetivos;
-            $reporteTecnico->palabras_claves = $request->palabras_claves;
+            $reporteTecnico->palabra_clave1 = $request->palabra_clave1;
+            $reporteTecnico->palabra_clave2 = $request->palabra_clave2;
+            $reporteTecnico->palabra_clave3 = $request->palabra_clave3;
+            $reporteTecnico->apoyo_CONACYT = $request->apoyo_CONACYT;
+            $reporteTecnico->fondo = $request->fondo;
+
             //id user 
             $reporteTecnico->id_investigador = $userId;
 
@@ -84,24 +87,22 @@ class ReporteTecnicoController extends Controller
         if (!$reporteTecnico) {
             return response()->json('No se encontró', 404);
         }
-        $request->validate([
-            'titulo' => 'required|string|max:25',
-            'institucion' => 'required|string',
-            'fecha_entrega' => 'required|date',
-            'fecha_publicacion' => 'required|date',
-            'nombramiento' => 'required|string|max:25',
-            'numero_paginas' => 'nullable|integer',
-            'origen' => 'nullable|string|max:15',
-            'descripcion' => 'nullable|string',
-            'objetivos' => 'nullable|string',
-            'palabras_claves' => 'nullable|string',
-        ]);
+        // $request->validate([
+        //     'titulo' => 'required|string|max:25',
+        //     'institucion' => 'required|string',
+        //     'fecha_entrega' => 'required|date',
+        //     'fecha_publicacion' => 'required|date',
+        //     'numero_paginas' => 'nullable|integer',
+        //     'origen' => 'nullable|string|max:15',
+        //     'descripcion' => 'nullable|string',
+        //     'objetivos' => 'nullable|string',
+        //     'palabras_claves' => 'nullable|string',
+        // ]);
 
         $reporteTecnico->titulo = $request->input('titulo');
         $reporteTecnico->institucion = $request->input('institucion');
         $reporteTecnico->fecha_entrega = $request->input('fecha_entrega');
         $reporteTecnico->fecha_publicacion = $request->input('fecha_publicacion');
-        $reporteTecnico->nombramiento = $request->input('nombramiento');
         $reporteTecnico->numero_paginas = $request->input('numero_paginas');
         $reporteTecnico->origen = $request->input('origen');
         $reporteTecnico->descripcion = $request->input('descripcion');

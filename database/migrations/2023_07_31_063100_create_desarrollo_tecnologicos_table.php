@@ -27,10 +27,10 @@ return new class extends Migration
             $table->string('Division_OCDE');
             $table->string('Grupo_OCDE');
             $table->string('Clase_OCDE');
-            $table->string('Area',25);
-            $table->string('Campo',25);
-            $table->string('Disciplina',25);
-            $table->string('Subdisciplina',25);
+            $table->string('Area');
+            $table->string('Campo');
+            $table->string('Disciplina');
+            $table->string('Subdisciplina');
             $table->tinyText('Generacion_valor');
             $table->tinyText('Formacion_RRHH');
             $table->tinyText('Id_usuario_beneficiario');

@@ -13,19 +13,19 @@ return new class extends Migration
     {
         Schema::create('patentes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 30);
-            $table->string('tipo_patente', 30);
-            $table->string('estado_patente', 30);
+            $table->string('nombre');
+            $table->string('tipo_patente');
+            $table->string('estado_patente');
             $table->bigInteger('numero_tramite');
             $table->date('fecha_solicitud');
             $table->date('fecha_registro');
             $table->bigInteger('numero_registro');
-            $table->string('expediente', 30);
-            $table->string('clasificacion_wipo', 30);
+            $table->string('expediente');
+            $table->string('clasificacion_wipo');
             $table->text('resumen');
-            $table->string('explotacion_industrial', 30);
+            $table->string('explotacion_industrial');
             $table->bigInteger('year_publicacion');
-            $table->string('pais', 30);
+            $table->string('pais');
             $table->string('usuario_benficiario');
             $table->text('conocimiento_teorico');
             $table->text('innovacion_implementada');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->text('analisis_pertinencia');
             $table->text('linea_investigacion');
             $table->text('numero_solicitud');
-            $table->string('registro_internacional', 30);
+            $table->string('registro_internacional');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('distinciones_no_conacyt', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_distincion',30);
-            $table->string('institucion',30);
+            $table->string('nombre_distincion');
+            $table->string('institucion');
             $table->bigInteger('year');
-            $table->string('pais',30);
+            $table->string('pais');
             $table->text('descripcion_distincion');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');

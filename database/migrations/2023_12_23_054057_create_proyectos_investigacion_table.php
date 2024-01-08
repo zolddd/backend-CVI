@@ -11,16 +11,16 @@ return new class extends Migration
     {
         Schema::create('proyectos_investigacion', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_proyecto', 30);
-            $table->string('tipo_proyecto', 30);
+            $table->string('nombre_proyecto');
+            $table->string('tipo_proyecto');
             $table->date('inicio');
             $table->date('fin');
-            $table->string('institucion', 30);
-            $table->string('logro_proyecto', 30);
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',25);
-            $table->string('subdisciplina',25);
+            $table->string('institucion');
+            $table->string('logro_proyecto');
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

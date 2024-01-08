@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\MedioController;
+// use App\Http\Controllers\MedioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DomicilioResidenciaController;
@@ -181,12 +181,12 @@ Route::post('/login', [UsuarioController::class, 'login']);
 Route::post('/register', [UsuarioController::class, 'register']);
 Route::middleware('auth:sanctum')->put('/credential', [UsuarioController::class, 'update']);
 
-// Medio
-Route::middleware('auth:sanctum')->post('/medios', [MedioController::class, 'record']);
+// // Medio
+// Route::middleware('auth:sanctum')->post('/medios', [MedioController::class, 'record']);
 
-Route::middleware('auth:sanctum')->get('/medios', [MedioController::class, 'list']);
-Route::middleware('auth:sanctum')->put('/medios/{id}', [MedioController::class, 'update']);
-Route::middleware('auth:sanctum')->delete('/medios/{id}', [MedioController::class, 'remove']);
+// Route::middleware('auth:sanctum')->get('/medios', [MedioController::class, 'list']);
+// Route::middleware('auth:sanctum')->put('/medios/{id}', [MedioController::class, 'update']);
+// Route::middleware('auth:sanctum')->delete('/medios/{id}', [MedioController::class, 'remove']);
 
 // Usuarios (Información general)
 Route::middleware('auth:sanctum')->get('/user', [InformacionGeneralController::class, 'get']);

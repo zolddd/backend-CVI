@@ -12,18 +12,18 @@ return new class extends Migration {
     {
         Schema::create('documento_trabajos', function (Blueprint $table) {
             $table->id();
-            $table->string('Titulo_documento', 25);
-            $table->string('Nombre_autor', 20);
-            $table->string('Primer_Apellido_Autor', 20);
-            $table->string('Segundo_Apellido_Autor', 20);
-            $table->string('Paginas', 5);
-            $table->string('Palabras_claves', 25);
-            $table->string('Titulo_publicacion', 25);
+            $table->string('Titulo_documento');
+            $table->string('Nombre_autor');
+            $table->string('Primer_Apellido_Autor');
+            $table->string('Segundo_Apellido_Autor');
+            $table->string('Paginas');
+            $table->string('Palabras_claves');
+            $table->string('Titulo_publicacion');
             $table->date('Año_Publicacion');
-            $table->string('Area', 25);
-            $table->string('Campo', 25);
-            $table->string('Disciplina', 25);
-            $table->string('Subdisciplina', 25);
+            $table->string('Area');
+            $table->string('Campo');
+            $table->string('Disciplina');
+            $table->string('Subdisciplina');
             // estableciendo relacion con el usuario
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');

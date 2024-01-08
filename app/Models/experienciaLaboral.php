@@ -12,6 +12,8 @@ class experienciaLaboral extends Model
     protected $fillable=[
         "Puesto_desempeñado",
         "Institucion",
+        "Institucion_catedra",
+        "Empleo_actual",
         "Fecha_inicio",
         "Fecha_fin",
         "Nombramiento",

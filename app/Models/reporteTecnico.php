@@ -14,12 +14,15 @@ class reporteTecnico extends Model
         "institucion",
         "fecha_entrega",
         "fecha_publicacion",
-        "nombramiento",
         "numero_paginas",
         "origen",
         "descripcion",
         "objetivos",
-        "palabras_claves",
+        "palabra_clave1",
+        "palabra_clave2",
+        "palabra_clave3",
+        "apoyo_CONACYT",
+        "fondo",
         "id_investigador"
     ];
 }

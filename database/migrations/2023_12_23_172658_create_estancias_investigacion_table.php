@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('estancias_investigacion', function (Blueprint $table) {
             $table->id();
-            $table->string('institucion', 30);
-            $table->string('nombre_estancia', 30);
+            $table->string('institucion');
+            $table->string('nombre_estancia');
             $table->date('inicio');
             $table->date('fin');
-            $table->string('tipo_estancia', 30);
-            $table->string('logro_profesional', 30);
-            $table->string('area', 30);
-            $table->string('campo',30);
-            $table->string('disciplina',30);
-            $table->string('subdisciplina',30);
+            $table->string('tipo_estancia');
+            $table->string('logro_profesional');
+            $table->string('area');
+            $table->string('campo');
+            $table->string('disciplina');
+            $table->string('subdisciplina');
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();

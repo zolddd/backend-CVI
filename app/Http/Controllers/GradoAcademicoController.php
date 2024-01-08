@@ -38,19 +38,19 @@ class GradoAcademicoController extends Controller
             // Validar la solicitud
 
 
-            $request->validate([
-                'Titulo' => 'required|string',
-                'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
-                'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
-                'Area' => 'required|string',
-                'Campo' => 'required|string',
-                'Disciplina' => 'required|string',
-                'Subdisciplina' => 'required|string',
-                'Cedula',
-                'Opciones_Titulacion',
-                'Fecha_Obtencion',
-                'Institucion' => 'required|string',
-            ]);
+            // $request->validate([
+            //     'Titulo' => 'required|string',
+            //     'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
+            //     'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
+            //     'Area' => 'required|string',
+            //     'Campo' => 'required|string',
+            //     'Disciplina' => 'required|string',
+            //     'Subdisciplina' => 'required|string',
+            //     'Cedula',
+            //     'Opciones_Titulacion',
+            //     'Fecha_Obtencion',
+            //     'Institucion' => 'required|string',
+            // ]);
 
             // Crear una nueva instancia del modelo gradoAcademico y asignar los valores de los campos.
             $gradoAcademico = new gradoAcademico;
@@ -92,19 +92,19 @@ class GradoAcademicoController extends Controller
         }
 
         // Validar la solicitud
-        $request->validate([
-            'Titulo' => 'required|string',
-            'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
-            'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
-            'Area' => 'required|string',
-            'Campo' => 'required|string',
-            'Disciplina' => 'required|string',
-            'Subdisciplina' => 'required|string',
-            'Cedula',
-            'Opciones_Titulacion',
-            'Fecha_Obtencion',
-            'Institucion' => 'required|string',
-        ]);
+        // $request->validate([
+        //     'Titulo' => 'required|string',
+        //     'Nivel_escolaridad' => 'required|in:Licenciatura,Especialidad,Maestría,Doctorado,Otro',
+        //     'Estatus' => 'required|in:Creditos terminados,Grado obtenido,Título o grado en proceso,Truncado',
+        //     'Area' => 'required|string',
+        //     'Campo' => 'required|string',
+        //     'Disciplina' => 'required|string',
+        //     'Subdisciplina' => 'required|string',
+        //     'Cedula',
+        //     'Opciones_Titulacion',
+        //     'Fecha_Obtencion',
+        //     'Institucion' => 'required|string',
+        // ]);
 
         // Crear una nueva instancia del modelo gradoAcademico y asignar los valores de los campos.
         $gradoAcademico = new gradoAcademico;

@@ -32,18 +32,18 @@ class ExperienciaLaboralController extends Controller
     public function store(Request $request)
     {
         // Validar la solicitud
-        $request->validate([
-            'Puesto_desempeñado' => 'required|string|max:25',
-            'Institucion' => 'required|string',
-            'Fecha_inicio' => 'required|date',
-            'Fecha_fin' => 'required|date|after_or_equal:Fecha_inicio',
-            'Nombramiento' => 'required|string|max:25',
-            'Logros' => 'required|string',
-            'Areas' => 'required|string|max:25',
-            'Campo' => 'required|string|max:25',
-            'Disciplina' => 'required|string|max:25',
-            'Subdisciplina' => 'required|string|max:25',
-        ]);
+        // $request->validate([
+        //     'Puesto_desempeñado' => 'required|string|max:25',
+        //     'Institucion' => 'required|string',
+        //     'Fecha_inicio' => 'required|date',
+        //     'Fecha_fin' => 'required|date|after_or_equal:Fecha_inicio',
+        //     'Nombramiento' => 'required|string|max:25',
+        //     'Logros' => 'required|string',
+        //     'Areas' => 'required|string|max:25',
+        //     'Campo' => 'required|string|max:25',
+        //     'Disciplina' => 'required|string|max:25',
+        //     'Subdisciplina' => 'required|string|max:25',
+        // ]);
 
         if (Auth::check()) {
             // Obtén el ID del usuario autenticado
@@ -52,6 +52,8 @@ class ExperienciaLaboralController extends Controller
             $experienciaLaboral = new ExperienciaLaboral;
             $experienciaLaboral->Puesto_desempeñado = $request->input('Puesto_desempeñado');
             $experienciaLaboral->Institucion = $request->input('Institucion');
+            $experienciaLaboral->Institucion_catedra = $request->input('Institucion_catedra');
+            $experienciaLaboral->Empleo_actual = $request->input('Empleo_actual');
             $experienciaLaboral->Fecha_inicio = $request->input('Fecha_inicio');
             $experienciaLaboral->Fecha_fin = $request->input('Fecha_fin');
             $experienciaLaboral->Nombramiento = $request->input('Nombramiento');
@@ -83,22 +85,24 @@ class ExperienciaLaboralController extends Controller
             return response()->json('No se encontró', 404);
         }
         // Validar la solicitud
-        $request->validate([
-            'Puesto_desempeñado' => 'required|string|max:25',
-            'Institucion' => 'required|string',
-            'Fecha_inicio' => 'required|date',
-            'Fecha_fin' => 'required|date|after_or_equal:Fecha_inicio',
-            'Nombramiento' => 'required|string|max:25',
-            'Logros' => 'required|string',
-            'Areas' => 'required|string|max:25',
-            'Campo' => 'required|string|max:25',
-            'Disciplina' => 'required|string|max:25',
-            'Subdisciplina' => 'required|string|max:25',
-        ]);
+        // $request->validate([
+        //     'Puesto_desempeñado' => 'required|string|max:25',
+        //     'Institucion' => 'required|string',
+        //     'Fecha_inicio' => 'required|date',
+        //     'Fecha_fin' => 'required|date|after_or_equal:Fecha_inicio',
+        //     'Nombramiento' => 'required|string|max:25',
+        //     'Logros' => 'required|string',
+        //     'Areas' => 'required|string|max:25',
+        //     'Campo' => 'required|string|max:25',
+        //     'Disciplina' => 'required|string|max:25',
+        //     'Subdisciplina' => 'required|string|max:25',
+        // ]);
 
         //data es un array con los datos del request
         $data["Puesto_desempeñado"] = $request["Puesto_desempeñado"];
         $data["Institucion"] = $request["Institucion"];
+        $data["Institucion_catedra"] = $request["Institucion_catedra"];
+        $data["Empleo_actual"] = $request["Empleo_actual"];
         $data["Fecha_inicio"] = $request["Fecha_inicio"];
         $data["Fecha_fin"] = $request["Fecha_fin"];
         $data["Nombramiento"] = $request["Nombramiento"];

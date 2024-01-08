@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('evaluaciones_conacyt', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_programa', 30);
+            $table->string('nombre_programa');
             $table->date('fecha_asignacion');
             $table->date('fecha_aceptacion');
             $table->date('fecha_evaluacion');

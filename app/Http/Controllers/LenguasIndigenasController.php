@@ -36,7 +36,7 @@ class LenguasIndigenasController extends Controller
             if (Auth::check()) {
                 // Obtén el ID del usuario autenticado
                 $userId = Auth::id();
-                $data["idioma"] = $request["idioma"];
+                $data["lengua"] = $request["lengua"];
                 $data["grado_dominio"] = $request["grado_dominio"];
                 $data["nivel_conversacion"] = $request["nivel_conversacion"];
                 $data["nivel_lectura"] = $request["nivel_lectura"];
@@ -64,7 +64,7 @@ class LenguasIndigenasController extends Controller
     {
         try {
             //data es un array con los datos del request
-            $data["idioma"] = $request["idioma"];
+            $data["lengua"] = $request["lengua"];
             $data["grado_dominio"] = $request["grado_dominio"];
             $data["nivel_conversacion"] = $request["nivel_conversacion"];
             $data["nivel_lectura"] = $request["nivel_lectura"];

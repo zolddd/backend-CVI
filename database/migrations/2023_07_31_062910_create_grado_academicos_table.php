@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('grado_academicos', function (Blueprint $table) {
             $table->id();
-            $table->string('Titulo', 25);
+            $table->string('Titulo');
             $table->string('Nivel_escolaridad');
             $table->string('Estatus');
             $table->string('Area');
