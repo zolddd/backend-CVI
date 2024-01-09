@@ -33,6 +33,7 @@ return new class extends Migration
             $table->string('titulo_traducido');
             $table->string('idioma_traducido');
             $table->boolean('apoyo_CONACYT');
+            $table->string('fondo')->nullable();
             $table->string('area');
             $table->string('campo');
             $table->string('disciplina');
@@ -44,7 +45,7 @@ return new class extends Migration
             $table->text('url_cita');
             $table->text('cita_a');
             $table->text('cita_b');
-            $table->bigInteger('total_citas');
+            $table->bigInteger('total_citas')->nullable();
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

@@ -29,14 +29,14 @@ return new class extends Migration
             $table->string('disciplina');
             $table->string('subdisciplina');
             $table->boolean('apoyo_CONACYT');
-            $table->string('fondo');
+            $table->string('fondo')->nullable();
             $table->string('rol_participacion');
             $table->string('estatus_publicacion');
             $table->string('objetivo');
             $table->text('url_cita');
             $table->string('cita_a');
             $table->string('cita_b');
-            $table->bigInteger('total_cita');
+            $table->bigInteger('total_cita')->nullable();
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
 

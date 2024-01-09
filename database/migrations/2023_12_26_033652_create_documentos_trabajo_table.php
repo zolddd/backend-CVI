@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('disciplina');
             $table->string('subdisciplina');
             $table->boolean('apoyo_CONACYT');
-            $table->string('fondo');
+            $table->string('fondo')->nullable();
             $table->unsignedBigInteger('id_investigador')->nullable();
             $table->foreign('id_investigador')->references('id')->on('usuarios')->onDelete('cascade');
             $table->timestamps();
