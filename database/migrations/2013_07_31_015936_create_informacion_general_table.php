@@ -17,7 +17,7 @@ return new class extends Migration
 
             // Researcher Attributes
             $table->string("curp")->unique();
-            $table->string("rfc")->unique();
+            $table->string("rfc")->unique()->nullable();
             $table->string("nombre");
             $table->string("primer_apellido");
             $table->string("segundo_apellido");
@@ -25,15 +25,10 @@ return new class extends Migration
             $table->enum("sexo", ["MASCULINO", "FEMENINO", "SIN ESPECIFICAR"]);
             $table->string("pais");
             $table->string("entidad");
-            $table->enum("estado_conyugal", ["CASADO", "DIVORCIADO", "SEPARADO", "SOLTERO", "UNION LIBRE", "VIUDO", "CONTRATOS DE CONVIVENCIA"]);
+            $table->enum("estado_conyugal", ["CASADO", "DIVORCIADO", "SEPARADO", "SOLTERO", "UNION LIBRE", "VIUDO", "CONTRATOS DE CONVIVENCIA"])->nullable();
             $table->string("nacionalidad");
             $table->string("cvi")->nullable();
-            // TODO: Add FK for address
-
-            $table->string("medio")->nullable(); // TODO: Add medio as a independent table :)
-            $table->string("categoria")->nullable();
-            $table->string("telefono")->nullable();
-            $table->string("principal")->nullable();
+            $table->string("tipo_beneficios")->nullable(); 
         });
     }
 

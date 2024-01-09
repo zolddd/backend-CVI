@@ -6,23 +6,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class domicilioResidencia extends Model
 {
+    protected $table = 'domicilio_residencias';
+
     use HasFactory;
 
     protected $fillable=[
         "Pais",
         "Codigo_postal",
+        "Nombre_asentamiento",
         "Estado",
         "Municipio_delegacion",
         "Localidad",
         "Asentamiento",
         "Tipo_asentamiento",
-        "Nombre_asentamiento",
         "Carretera",
         "Nombre_vialidad",
-        "Parte_numerica1",
+        "Sin_numero",
+        "Parte_numerica",
+        "parte_numerica_interior",
         "Numero_exterior_anterior",
         "Parte_alfanumerica",
-        "Parte_numerica2",
+        "Parte_alfanumerica_interior",
         "Tipo",
         "Nombre",
         "Descripcion_ubicacion",
@@ -33,4 +37,6 @@ class domicilioResidencia extends Model
     {
         return $this->belongsTo(Usuario::class, 'id_investigador');
     }
+
+
 }

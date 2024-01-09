@@ -38,6 +38,7 @@ use App\Http\Controllers\LenguasIndigenasController;
 use App\Http\Controllers\CertificacionesMedicasController;
 use App\Http\Controllers\DifusionCapitulosPublicadosController;
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\MedioContactoController;
 
 use App\Http\Controllers\UsuarioController;
 
@@ -167,6 +168,9 @@ Route::apiResource('difusionCapitulosPublicados', DifusionCapitulosPublicadosCon
 //Reviews
 Route::apiResource('reviews', ReviewsController::class)->middleware('auth:sanctum');
 
+
+//medio Contacto 
+Route::apiResource('medioContacto', MedioContactoController::class)->middleware('auth:sanctum');
 
 
 
